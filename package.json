@@ -2,7 +2,10 @@
   "name": "clone-spotify",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maRT1gaS/clone-spotify.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
