@@ -1,6 +1,6 @@
 First step:  
-    npm install  
+  npm install  
 Second step:  
-    Dev server: npm run start  
+  Dev server: npm run start  
 or  
-    Prod build: npm run build  
+  Prod build: npm run build  
