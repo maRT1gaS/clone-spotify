@@ -1,6 +1,7 @@
 First step:  
-  npm install  
+&emsp;npm install 
+------------------------------ 
 Second step:  
-  Dev server: npm run start  
+&emsp;Dev server: npm run start  
 or  
-  Prod build: npm run build  
+&emsp;Prod build: npm run build  
