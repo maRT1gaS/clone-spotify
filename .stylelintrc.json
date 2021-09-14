@@ -1,0 +1,19 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-css-modules",
+    "stylelint-order-config-standard"
+  ],
+  "plugins": [
+    "stylelint-order"
+  ],
+  "rules": {
+    "color-hex-case": "upper",
+    "function-comma-space-after": "always",
+    "function-parentheses-space-inside": "always",
+    "declaration-colon-space-before": "never",
+    "color-hex-length": "short",
+    "declaration-no-important": true,
+    "unit-blacklist": ["px"]
+  }
+}
