@@ -3,5 +3,5 @@
 ___
 ## Second step:  
 &emsp;**Dev server: npm run start**   
-## or  
+### or  
 &emsp;**Prod build: npm run build**   
