@@ -1,0 +1,15 @@
+@import "./variables.css";
+
+html {
+  overflow: hidden;
+  /* stylelint-disable-next-line unit-blacklist */
+  font-size: 10px;
+}
+
+body {
+  color: var( --white );
+  background: #0F0F0F;
+
+  font-family: 'Proxima Nova', Arial, 'Times New Roman', sans-serif;
+  font-weight: 400;
+}
