@@ -1,0 +1,25 @@
+name: ESLint
+
+on:
+  - push
+  - pull_request
+    
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [15.x]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setups-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: npm run eslint:fix
+      run: |
+        npm run eslint:fix
+    - name: npm run eslint
+      run: |
+        npm run eslint
+        
