@@ -4,8 +4,6 @@
   display: flex;
   align-items: center;
 
-  margin: 0 1rem 0 0;
-
   padding: 0.8rem;
 
   transition: opacity 0.3s linear;

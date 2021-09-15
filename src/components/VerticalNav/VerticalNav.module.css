@@ -3,7 +3,7 @@
 .navWrapper {
   width: 35rem;
   min-height: 100vh;
-  padding: 2rem 0 0 0.5rem;
+  padding: 2rem 1rem 0 0.5rem;
 
   background-color: var( --black );
 }
