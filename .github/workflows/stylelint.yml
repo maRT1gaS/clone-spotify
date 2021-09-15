@@ -21,7 +21,7 @@ jobs:
           npm install
       - name: npm run stylelint:fix
         run: |
-          npm run stylelintlint:fix
+          npm run stylelint:fix
       - name: npm run stylelint
         run: |
           npm run stylelint
