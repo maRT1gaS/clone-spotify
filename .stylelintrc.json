@@ -14,6 +14,6 @@
     "declaration-colon-space-before": "never",
     "color-hex-length": "short",
     "declaration-no-important": true,
-    "unit-blacklist": ["px"]
+    "unit-disallowed-list": ["px"]
   }
 }
