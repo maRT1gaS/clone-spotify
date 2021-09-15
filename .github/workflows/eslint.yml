@@ -3,7 +3,6 @@ name: ESLint
 on:
   - push
   - pull_request
-    
 
 jobs:
   deploy:
@@ -14,15 +13,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: npm install
-      run: |
-        npm install
-    - name: npm run eslint:fix
-      run: |
-        npm run eslint:fix
-    - name: npm run eslint
-      run: |
-        npm run eslint
-        
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: npm install
+        run: |
+          npm install
+      - name: npm run eslint:fix
+        run: |
+          npm run eslint:fix
+      - name: npm run eslint
+        run: |
+          npm run eslint
