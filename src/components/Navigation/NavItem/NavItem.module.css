@@ -1,0 +1,32 @@
+@import '../../../styles/variables.css';
+
+.navLink {
+  display: flex;
+  align-items: center;
+
+  margin: 0 1rem 0 0;
+
+  padding: 0.8rem;
+
+  transition: opacity 0.3s linear;
+
+  opacity: 0.7;
+  border-radius: 1rem;
+}
+
+.navLink:hover {
+  opacity: 1;
+}
+
+.navLinkTitle {
+  margin-left: 1rem;
+
+  color: var( --white );
+
+  font-size: 2rem;
+}
+
+.navLinkActive {
+  opacity: 1;
+  background-color: rgba( 255, 255, 255, 0.7 );
+}

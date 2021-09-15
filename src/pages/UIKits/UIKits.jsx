@@ -1,5 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { Input } from '../../components/index';
 
 const UIKits = () => (
   <>
@@ -7,7 +8,7 @@ const UIKits = () => (
       <title>UIKits</title>
     </Helmet>
     <div>
-      <h2>Work!</h2>
+      <Input type='text' />
     </div>
   </>
 );
