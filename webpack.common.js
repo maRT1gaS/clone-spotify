@@ -6,9 +6,7 @@ const EslintWebpackPlugin = require('eslint-webpack-plugin');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
 
 module.exports = {
-  entry: [
-  '@babel/polyfill',
-  './src/index.jsx'],
+  entry: ['@babel/polyfill', './src/index.jsx'],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index.bundle.js',
@@ -28,31 +26,29 @@ module.exports = {
     new EslintWebpackPlugin({
       extensions: ['js', 'jsx'],
       fix: true,
-      lintDirtyModulesOnly: true
+      lintDirtyModulesOnly: true,
     }),
     new CopyWebpackPlugin({
       patterns: [
         {
           from: './public/favicons/',
-          to: 'assets/favicons'
-        }
-      ]
+          to: 'assets/favicons',
+        },
+      ],
     }),
     new ImageminPlugin({
-      test: /\.(jpe?g|png|git|svg)$/i
-    })
+      test: /\.(jpe?g|png|git|svg)$/i,
+    }),
   ],
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/i,
-        use: ["babel-loader"],
+        use: ['babel-loader'],
       },
       {
         test: /\.svg$/i,
-        use: [
-          "@svgr/webpack",
-        ],
+        use: ['@svgr/webpack'],
       },
     ],
   },
