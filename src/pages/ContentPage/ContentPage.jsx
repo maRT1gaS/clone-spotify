@@ -5,9 +5,10 @@ import UIKits from '../../screens/UIKits/UIKits';
 import Home from '../../screens/Home/Home';
 import Search from '../../screens/Search/Search';
 import MediaLibrary from '../../screens/MediaLibrary/MediaLibrary';
+import styles from './ContentPage.module.css';
 
 const ContentPage = () => (
-  <>
+  <div className={styles.wrapperContent}>
     <VerticalNav />
     <Switch>
       <Route exact path='/' component={Home} />
@@ -16,7 +17,7 @@ const ContentPage = () => (
       <Route exact path='/uikits' component={UIKits} />
       <Redirect to='/404' />
     </Switch>
-  </>
+  </div>
 );
 
 export default ContentPage;

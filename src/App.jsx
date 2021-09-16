@@ -11,7 +11,7 @@ const App = () => {
   return (
     <div className={styles.wrapper}>
       {loading ? (
-        LoaderPage
+        <LoaderPage />
       ) : (
         <Switch>
           <Route exact path='/404' component={NotFound} />

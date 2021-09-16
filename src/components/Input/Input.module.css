@@ -1,3 +1,30 @@
-.input {
+@import '../../styles/variables.css';
+
+.inputCon {
   position: relative;
+}
+
+.inputIcon {
+  position: absolute;
+  top: 0.7rem;
+
+  cursor: text;
+}
+
+.inputIcon svg {
+  width: 2rem;
+  height: 2rem;
+  fill: var( --grey );
+}
+
+.input {
+  width: 100%;
+  padding: 1rem 0 1rem 2rem;
+
+  border-radius: 1rem;
+  outline: none;
+}
+
+.onTab {
+  border: 0.2rem solid var( --green );
 }
