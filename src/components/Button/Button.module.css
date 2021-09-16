@@ -1,0 +1,26 @@
+@import '../../styles/variables.css';
+
+.button {
+  padding: 0.5rem 5rem;
+
+  transition: 0.4s ease;
+
+  border-radius: 10rem;
+  background-color: var( --white );
+}
+
+.button:hover {
+  transform: scale( 1.1 );
+
+  background-color: var( --green );
+
+  font-weight: 700;
+}
+
+.onTab {
+  transform: scale( 1.1 );
+
+  background-color: var( --green );
+
+  font-weight: 700;
+}

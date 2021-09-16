@@ -1,24 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import UIKits from './pages/UIKits/UIKits';
-import Home from './pages/Home/Home';
-import Search from './pages/Search/Search';
-import MediaLibrary from './pages/MediaLibrary/MediaLibrary';
-import NotFound from './pages/NotFound/NotFound';
-import { VerticalNav } from './components/index';
 import styles from './App.module.css';
+import NotFound from './pages/NotFound/NotFound';
+import ContentPage from './pages/ContentPage/ContentPage';
+import { LoaderPage } from './components/index';
 
-const App = () => (
-  <div className={styles.wrapper}>
-    <VerticalNav />
-    <Switch>
-      <Route exact path='/' component={Home} />
-      <Route exact path='/search' component={Search} />
-      <Route exact path='/medialibrary' component={MediaLibrary} />
-      <Route exact path='/uikits' component={UIKits} />
-      <Route path='*' component={NotFound} />
-    </Switch>
-  </div>
-);
+const App = () => {
+  const [loading, setLoading] = useState(true);
+  useEffect(() => setLoading(false), []);
+  return (
+    <div className={styles.wrapper}>
+      {loading ? (
+        LoaderPage
+      ) : (
+        <Switch>
+          <Route exact path='/404' component={NotFound} />
+          <Route path='/' component={ContentPage} />
+        </Switch>
+      )}
+    </div>
+  );
+};
 
 export default App;
