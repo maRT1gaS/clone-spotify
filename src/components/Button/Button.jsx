@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styles from './Button.module.css';
 
-export const Button = ({ children, type }) => {
+export const Button = ({ children, type, onClick }) => {
   const [onTab, setOnTab] = useState(false);
 
   const setOutline = (key) => {
@@ -19,6 +19,7 @@ export const Button = ({ children, type }) => {
       })}
       onBlur={() => setOnTab(false)}
       onKeyUp={setOutline}
+      onClick={onClick}
     >
       {children}
     </button>
@@ -28,8 +29,10 @@ export const Button = ({ children, type }) => {
 Button.propTypes = {
   children: PropTypes.node.isRequired,
   type: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 Button.defaultProps = {
   type: 'button',
+  onClick: null,
 };

@@ -1,0 +1,21 @@
+.formContent {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  width: 80%;
+  height: 20rem;
+  margin: 1rem 0;
+}
+
+.formInputs {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  width: 100%;
+  height: 80%;
+  margin-bottom: 1rem;
+}

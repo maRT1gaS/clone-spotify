@@ -1,0 +1,6 @@
+@import '../../../styles/variables.css';
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+}

@@ -13,3 +13,37 @@ body {
   font-family: 'Proxima Nova', Arial, 'Times New Roman', sans-serif;
   font-weight: 400;
 }
+
+.flex {
+  display: flex;
+}
+
+.justify-content-c {
+  justify-content: center;
+}
+
+.justify-content-sa {
+  justify-content: space-around;
+}
+
+.align-items-c {
+  align-items: center;
+}
+
+.flex-direction-col {
+  flex-direction: column;
+}
+
+.visually-hidden {
+  position: absolute;
+
+  overflow: hidden;
+  clip: rect( 0 0 0 0 );
+
+  width: 0.1rem;
+  height: 0.1rem;
+  margin: -0.1rem;
+
+  white-space: nowrap;
+  clip-path: inset( 50% );
+}

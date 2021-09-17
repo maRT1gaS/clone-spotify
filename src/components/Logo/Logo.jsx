@@ -8,13 +8,21 @@ export const Logo = () => {
   const location = useLocation();
   return (
     <>
-      {location.pathname === '/' ? (
-        <div className={styles.logo}>
+      {['/', '/login', '/registration'].includes(location.pathname) ? (
+        <div
+          className={styles.logo}
+          title='Spoty'
+          style={{ cursor: 'default' }}
+        >
           <LogoIcon />
           <h1 className={styles.logoName}>Spoty</h1>
         </div>
       ) : (
-        <Link to='/' className={`${styles.logo} ${styles.logoLink}`}>
+        <Link
+          to='/'
+          title='Spoty'
+          className={`${styles.logo} ${styles.logoLink}`}
+        >
           <LogoIcon />
           <h1 className={styles.logoName}>Spoty</h1>
         </Link>

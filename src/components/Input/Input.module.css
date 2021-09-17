@@ -2,13 +2,36 @@
 
 .inputCon {
   position: relative;
+
+  width: 100%;
 }
 
 .inputIcon {
   position: absolute;
-  top: 0.7rem;
+  top: 0.5rem;
+}
+
+.preIcon {
+  left: 0.5rem;
 
   cursor: text;
+}
+
+.clearIcon {
+  right: 0.5rem;
+
+  cursor: pointer;
+  animation: animClearIcon 0.3s linear;
+}
+
+@keyframes animClearIcon {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 .inputIcon svg {
@@ -19,12 +42,45 @@
 
 .input {
   width: 100%;
-  padding: 1rem 0 1rem 2rem;
+  height: 3rem;
+  padding: 1rem 1rem 1rem 3rem;
+  caret-color: var( --green );
 
+  border: none;
   border-radius: 1rem;
   outline: none;
+
+  font-size: 1.4rem;
+}
+
+.paddingRight {
+  padding-right: 3rem;
 }
 
 .onTab {
   border: 0.2rem solid var( --green );
+}
+
+.input::placeholder {
+  font-size: 1.4rem;
+  line-height: 3rem;
+}
+
+.input:-webkit-autofill {
+  box-shadow: 0 0 0 100rem white inset;
+}
+
+.input[type=text]::-ms-clear,
+.input[type=text]::-ms-reveal {
+  display: none;
+
+  width: 0;
+  height: 0;
+}
+
+.input[type="search"]::-webkit-search-decoration,
+.input[type="search"]::-webkit-search-cancel-button,
+.input[type="search"]::-webkit-search-results-button,
+.input[type="search"]::-webkit-search-results-decoration {
+  display: none;
 }
