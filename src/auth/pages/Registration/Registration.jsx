@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 import AuthContainer from '../../components/AuthContainer/AuthContainer';
 import AuthTitle from '../../components/AuthTitle/AuthTitle';
-import { Input, Button, Form, Logo } from '../../../components/index';
+import {
+  Input,
+  Button,
+  Form,
+  Logo,
+  CustomLink,
+} from '../../../components/index';
 
 import EmailIcon from '../../../assets/svg/email.svg';
 import PasswordIcon from '../../../assets/svg/padlock.svg';
@@ -14,6 +20,7 @@ import UserIcon from '../../../assets/svg/user.svg';
 import styles from './Registration.module.css';
 
 const Registration = () => {
+  const history = useHistory();
   const [nameInp, setNameInp] = useState('');
   const [emailInp, setEmailInp] = useState('');
   const [passwordInp, setPasswordInp] = useState('');
@@ -44,6 +51,8 @@ const Registration = () => {
     setEmailInp('');
     setCopyPasswordInp('');
     setNameInp('');
+
+    history.push('/login');
   };
 
   return (
@@ -51,10 +60,7 @@ const Registration = () => {
       <Helmet>
         <title>Регистрация</title>
       </Helmet>
-      <div
-        className='flex justify-content-c align-items-c flex-direction-col'
-        style={{ width: '100%', minHeight: '100vh' }}
-      >
+      <div className='flex justify-content-c align-items-c flex-direction-col fullscreen'>
         <Logo />
         <AuthContainer>
           <AuthTitle>Регистрация</AuthTitle>
@@ -104,7 +110,7 @@ const Registration = () => {
               <Button type='submit'>Зарегестрироваться</Button>
             </div>
           </Form>
-          <Link to='/login'>Уже есть аккаунт?</Link>
+          <CustomLink path='/login'>Уже есть аккаунт?</CustomLink>
         </AuthContainer>
       </div>
     </>

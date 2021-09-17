@@ -4,3 +4,4 @@ export * from './Input/Input';
 export * from './Button/Button';
 export * from './LoaderPage/LoaderPage';
 export * from './Form/Form';
+export * from './CustomLink/CustomLink';

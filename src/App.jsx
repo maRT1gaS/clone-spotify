@@ -11,7 +11,7 @@ const App = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => setLoading(false), []);
   return (
-    <div className={styles.wrapper}>
+    <div className={`${styles.wrapper} fullscreen`}>
       {loading ? (
         <LoaderPage />
       ) : (

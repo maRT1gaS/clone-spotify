@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import AuthContainer from '../../components/AuthContainer/AuthContainer';
 import AuthTitle from '../../components/AuthTitle/AuthTitle';
-import { Input, Button, Form, Logo } from '../../../components/index';
+import {
+  Input,
+  Button,
+  Form,
+  Logo,
+  CustomLink,
+} from '../../../components/index';
 
 import EmailIcon from '../../../assets/svg/email.svg';
 import PasswordIcon from '../../../assets/svg/padlock.svg';
@@ -26,13 +31,10 @@ const Login = () => {
       password: passwordInp,
     };
 
-    axios
-      .post('http://localhost:5000/api/auth/signin', {
-        ...data,
-      })
-      .then((res) => {
-        console.log(res);
-      });
+    axios.post('http://localhost:5000/api/auth/signin', {
+      ...data,
+    });
+    // .then((res) => {});
 
     setEmailInp('');
     setPasswordInp('');
@@ -43,10 +45,7 @@ const Login = () => {
       <Helmet>
         <title>Вход</title>
       </Helmet>
-      <div
-        className='flex justify-content-c align-items-c flex-direction-col'
-        style={{ width: '100%', minHeight: '100vh' }}
-      >
+      <div className='flex justify-content-c align-items-c flex-direction-col fullscreen'>
         <Logo />
         <AuthContainer>
           <AuthTitle>Вход</AuthTitle>
@@ -74,7 +73,7 @@ const Login = () => {
               <Button type='submit'>Войти</Button>
             </div>
           </Form>
-          <Link to='/registration'>Зарегестрироваться</Link>
+          <CustomLink path='/registration'>Нет аккаунта?</CustomLink>
         </AuthContainer>
       </div>
     </>

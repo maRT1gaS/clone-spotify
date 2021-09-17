@@ -1,0 +1,32 @@
+@import '../../styles/variables.css';
+
+.link {
+  position: relative;
+}
+
+.small {
+  font-size: 1.2rem;
+}
+
+.big {
+  font-size: 2rem;
+}
+
+.link::before {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  width: 0;
+
+  height: 0.1rem;
+
+  content: '';
+  transition: 0.3s linear;
+
+  background-color: var( --white );
+}
+
+.link:hover::before {
+  width: 100%;
+}
