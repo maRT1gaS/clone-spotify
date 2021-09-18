@@ -31,10 +31,13 @@ const Login = () => {
       password: passwordInp,
     };
 
-    axios.post('http://localhost:5000/api/auth/signin', {
-      ...data,
-    });
-    // .then((res) => {});
+    axios
+      .post('/api/auth/signin', {
+        ...data,
+      })
+      .then((res) => {
+        console.log(res);
+      });
 
     setEmailInp('');
     setPasswordInp('');

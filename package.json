@@ -6,6 +6,7 @@
     "type": "git",
     "url": "https://github.com/maRT1gaS/clone-spotify.git"
   },
+  "proxy": "http://localhost:5000",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack/webpack.prod.js",
