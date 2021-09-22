@@ -1,0 +1,70 @@
+@import '../../../styles/variables.css';
+
+.musicItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0.5rem 1.5rem;
+
+  cursor: pointer;
+}
+
+.musicItem:hover {
+  border-radius: 1rem;
+  background-color: rgba( 255, 255, 255, 0.1 );
+}
+
+.musicItemContent {
+  display: flex;
+  align-items: center;
+}
+
+.musicItemSVG {
+  width: 2rem;
+  height: 2rem;
+}
+
+.hover {
+  fill: var( --white );
+}
+
+.unHover {
+  fill: rgba( 255, 255, 255, 0.7 );
+}
+
+.musicItemImg {
+  width: 5rem;
+  height: 5rem;
+  margin-left: 1.5rem;
+}
+
+.musicItemInfo {
+  margin-left: 1.5rem;
+}
+
+.musicItemName {
+  color: rgba( 255, 255, 255, 0.9 );
+
+  font-size: 1.7rem;
+}
+
+.musicItemSecondInfo {
+  margin-top: 0.5rem;
+
+  color: rgba( 255, 255, 255, 0.7 );
+
+  font-size: 1.3rem;
+}
+
+.musicItemTime {
+  color: rgba( 255, 255, 255, 0.7 );
+
+  font-size: 1.7rem;
+}
+
+.musicItem:hover .musicItemSecondInfo,
+.musicItem:hover .musicItemTime,
+.musicItem:hover .musicItemName {
+  color: var( --white );
+}

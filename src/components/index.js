@@ -10,3 +10,5 @@ export * from './ContentHeader/ContentHeader';
 export * from './HeaderUser/HeaderUser';
 export * from './Notification/Notification';
 export * from './ProtectedRoute/ProtectedRoute';
+export * from './Title/Title';
+export * from './ContentWrapper/ContentWrapper';

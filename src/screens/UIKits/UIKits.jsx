@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Input, Button, LoaderPage } from '../../components/index';
+import { Input, Button, LoaderPage, Title } from '../../components/index';
 import Search from '../../assets/svg/loupe.svg';
 import ClearIcon from '../../assets/svg/delete.svg';
+import { MusicItem } from '../../components/MusicList/MusicItem/MusicItem';
 
 const UIKits = () => {
   const [value, setValue] = useState('');
@@ -33,6 +34,14 @@ const UIKits = () => {
         <Button>Войти</Button>
         <LoaderPage />
         <ClearIcon />
+        <Title name='Рекомендации для тебя' />
+        <MusicItem
+          time={175}
+          nameMusic='Deamons'
+          nameArtist='Imagine Dragons'
+          imageUrl='/files/covers/night-visions.jpg'
+          nameAlbum='Night Visions'
+        />
       </div>
     </>
   );
