@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import AuthContainer from '../../components/AuthContainer/AuthContainer';
 import AuthTitle from '../../components/AuthTitle/AuthTitle';
@@ -19,7 +20,9 @@ import UserIcon from '../../../assets/svg/user.svg';
 
 import styles from './Registration.module.css';
 
-const Registration = () => {
+import { registrationAction } from '../../../redux/actions/registrationAction';
+
+const Registration = ({ isAuth, onRegistartion, typeNotification }) => {
   const history = useHistory();
   const [nameInp, setNameInp] = useState('');
   const [emailInp, setEmailInp] = useState('');
@@ -37,23 +40,33 @@ const Registration = () => {
   const handleAuthorization = (e) => {
     e.preventDefault();
 
-    const data = {
+    const userData = {
       name: nameInp,
       email: emailInp,
       password: passwordInp,
+      copypassword: copyPasswordInp,
     };
 
-    axios.post('http://localhost:5000/api/auth/signup', {
-      ...data,
-    });
-
-    setPasswordInp('');
-    setEmailInp('');
-    setCopyPasswordInp('');
-    setNameInp('');
-
-    history.push('/login');
+    onRegistartion(userData);
   };
+
+  useEffect(() => {
+    if (!isAuth) {
+      const firstInput = document.getElementById('name');
+      firstInput.focus();
+      if (typeNotification === 'success') {
+        setPasswordInp('');
+        setEmailInp('');
+        setCopyPasswordInp('');
+        setNameInp('');
+        history.push('/login');
+      }
+    }
+  }, [history, isAuth, typeNotification]);
+
+  if (isAuth) {
+    return <Redirect push to='/' />;
+  }
 
   return (
     <>
@@ -70,7 +83,7 @@ const Registration = () => {
                 <Input
                   value={nameInp}
                   onChange={handleNameInp}
-                  placeholder='Введите вашe имя'
+                  placeholder='Введите вашe имя*'
                   type='text'
                   id='name'
                   text='Введите ваше имя'
@@ -80,7 +93,7 @@ const Registration = () => {
                 <Input
                   value={emailInp}
                   onChange={handleEmailInp}
-                  placeholder='Введите ваш email'
+                  placeholder='Введите ваш email*'
                   type='email'
                   id='email'
                   text='Введите ваш email'
@@ -90,7 +103,7 @@ const Registration = () => {
                 <Input
                   value={passwordInp}
                   onChange={handlePasswordInp}
-                  placeholder='Введите ваш пароль'
+                  placeholder='Введите ваш пароль*'
                   type='password'
                   id='password'
                   text='Введите ваш пароль'
@@ -100,7 +113,7 @@ const Registration = () => {
                 <Input
                   value={copyPasswordInp}
                   onChange={handleCopyPasswordInp}
-                  placeholder='Повторите ваш пароль'
+                  placeholder='Повторите ваш пароль*'
                   type='password'
                   id='passwordcopy'
                   text='Повторите ваш пароль'
@@ -117,4 +130,19 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+Registration.propTypes = {
+  isAuth: PropTypes.bool.isRequired,
+  onRegistartion: PropTypes.func.isRequired,
+  typeNotification: PropTypes.string.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  isAuth: state.authReducer.isAuth,
+  typeNotification: state.notificationReducer.typeNotification,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onRegistartion: (userData) => dispatch(registrationAction(userData)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Registration);

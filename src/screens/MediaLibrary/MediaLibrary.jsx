@@ -7,7 +7,7 @@ const MediaLibrary = () => (
       <title>Моя медиатека</title>
     </Helmet>
     <div>
-      <h2>MediaLibrary</h2>
+      <h3>medialibrary</h3>
     </div>
   </>
 );

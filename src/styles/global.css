@@ -8,7 +8,7 @@ html {
 
 body {
   color: var( --white );
-  background: #0F0F0F;
+  background: var( --background-dark );
 
   font-family: 'Proxima Nova', Arial, 'Times New Roman', sans-serif;
   font-weight: 400;

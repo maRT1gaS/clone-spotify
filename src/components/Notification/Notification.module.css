@@ -1,0 +1,39 @@
+.notificationContainer {
+  position: absolute;
+  right: 0;
+  bottom: 5rem;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: max-content;
+  margin: auto;
+  padding: 2rem;
+
+  animation: animNotificationCon 1s linear;
+}
+
+.error {
+  background-color: #900;
+}
+
+.success {
+  background-color: #3C0;
+}
+
+@keyframes animNotificationCon {
+  0% {
+    transform: translateY( 10rem );
+  }
+
+  100% {
+    transform: translateY( 0 );
+  }
+}
+
+.notificationText {
+  font-size: 2rem;
+  font-weight: 700;
+}

@@ -5,3 +5,8 @@ export * from './Button/Button';
 export * from './LoaderPage/LoaderPage';
 export * from './Form/Form';
 export * from './CustomLink/CustomLink';
+export * from './MediaPlayer/MediaPlayer';
+export * from './ContentHeader/ContentHeader';
+export * from './HeaderUser/HeaderUser';
+export * from './Notification/Notification';
+export * from './ProtectedRoute/ProtectedRoute';

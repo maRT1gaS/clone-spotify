@@ -14,6 +14,7 @@ export const Input = ({
   value,
   onChange,
   handleClear,
+  autoComplete,
 }) => {
   const inputRef = useRef();
   const [onTab, setOnTab] = useState(false);
@@ -45,6 +46,7 @@ export const Input = ({
       </label>
 
       <input
+        autoComplete={autoComplete}
         onChange={onChange}
         value={value}
         id={id}
@@ -80,13 +82,17 @@ Input.propTypes = {
   clearIcon: PropTypes.bool,
   id: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
   handleClear: PropTypes.func,
+  autoComplete: PropTypes.string,
 };
 
 Input.defaultProps = {
   preIcon: null,
   clearIcon: false,
   handleClear: null,
+  autoComplete: 'on',
+  value: null,
+  onChange: null,
 };

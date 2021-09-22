@@ -6,9 +6,7 @@ const Search = () => (
     <Helmet>
       <title>Поиск</title>
     </Helmet>
-    <div>
-      <h2>Search</h2>
-    </div>
+    <h2>search</h2>
   </>
 );
 

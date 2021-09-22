@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import styles from './Logo.module.css';
 import LogoIcon from '../../assets/svg/logo.svg';
 
-export const Logo = () => {
+export const Logo = ({ path }) => {
   const location = useLocation();
   return (
     <>
@@ -18,7 +19,7 @@ export const Logo = () => {
         </div>
       ) : (
         <Link
-          to='/'
+          to={path}
           title='Spoty'
           className={`${styles.logo} ${styles.logoLink}`}
         >
@@ -28,4 +29,12 @@ export const Logo = () => {
       )}
     </>
   );
+};
+
+Logo.propTypes = {
+  path: PropTypes.string,
+};
+
+Logo.defaultProps = {
+  path: '/',
 };

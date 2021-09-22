@@ -14,6 +14,10 @@ export const Form = ({ children, legend, onSubmit, role }) => (
 Form.propTypes = {
   children: PropTypes.element.isRequired,
   legend: PropTypes.string.isRequired,
-  onSubmit: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func,
   role: PropTypes.string.isRequired,
+};
+
+Form.defaultProps = {
+  onSubmit: null,
 };
