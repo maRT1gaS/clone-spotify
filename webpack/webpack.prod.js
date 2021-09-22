@@ -12,10 +12,7 @@ module.exports = merge(common, {
     clean: true,
   },
   optimization: {
-    minimizer: [
-      new CssMinimizerPlugin(),
-      new TerserWebpackPlugin(),
-    ],
+    minimizer: [new CssMinimizerPlugin(), new TerserWebpackPlugin()],
   },
   plugins: [
     new MiniCssExtractPlugin({
@@ -25,25 +22,29 @@ module.exports = merge(common, {
   module: {
     rules: [
       {
+        test: /\.(js|jsx)$/i,
+        use: ['babel-loader'],
+      },
+      {
         test: /\.css$/i,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-          }, 
+          },
           {
             loader: 'css-loader',
             options: {
               esModule: false,
-              importLoaders: 1
-            }
+              importLoaders: 1,
+            },
           },
           {
-            loader: "postcss-loader",
+            loader: 'postcss-loader',
             options: {
-              implementation: require("postcss"),
+              implementation: require('postcss'),
               postcssOptions: {
                 config: path.resolve('./postcss.config.js'),
-              }, 
+              },
             },
           },
         ],
@@ -60,6 +61,6 @@ module.exports = merge(common, {
           },
         ],
       },
-    ]
-  }
-})
+    ],
+  },
+});
