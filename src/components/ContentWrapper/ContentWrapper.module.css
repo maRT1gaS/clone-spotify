@@ -1,3 +1,22 @@
+@import '../../styles/variables';
+
 .contentWrapper {
+  position: relative;
+
+  overflow-y: auto;
+
+  width: 100%;
+
+  /*  8rem - MediaPlayer 5.5rem - ContentHeader */
+  height: calc( 100vh - 8rem - 5.5rem );
   padding: 1rem 2rem;
+}
+
+.contentWrapper::-webkit-scrollbar {
+  width: 1rem;
+  height: 100%;
+}
+
+.contentWrapper::-webkit-scrollbar-thumb {
+  background: rgba( 255, 255, 255, 0.3 );
 }

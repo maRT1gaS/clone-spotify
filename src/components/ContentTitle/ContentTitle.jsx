@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './Title.module.css';
+import styles from './ContentTitle.module.css';
 
-export function Title({ name }) {
+export function ContentTitle({ name }) {
   return <h2 className={styles.title}>{name}</h2>;
 }
 
-Title.propTypes = {
+ContentTitle.propTypes = {
   name: PropTypes.string.isRequired,
 };

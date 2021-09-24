@@ -18,7 +18,7 @@ export const MusicItem = ({
       role='presentation'
       onPointerEnter={() => setHover(true)}
       onPointerLeave={() => setHover(false)}
-      className={styles.musicItem}
+      className={`${styles.musicItem} no-copy`}
     >
       <div className={styles.musicItemContent}>
         {hover ? (

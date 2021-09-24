@@ -17,6 +17,7 @@ export const successAuthAction = (data) => ({
     isAuth: true,
     name: data.name,
     email: data.email,
+    id: data.id,
   },
 });
 
@@ -35,6 +36,7 @@ export const authorisationAction = (authData) => (dispatch) => {
         const userDara = {
           name: res.data.name,
           email: res.data.email,
+          id: res.data.id,
         };
         sessionStorage.setItem('userDara', JSON.stringify(userDara));
         dispatch(successAuthAction(res.data));

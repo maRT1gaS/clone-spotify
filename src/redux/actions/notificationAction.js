@@ -31,6 +31,13 @@ export const errorPasswordDoesNotMatch = () => ({
   },
 });
 
+export const errorNotAuth = () => ({
+  type: ERROR,
+  payload: {
+    textNotification: 'Для просмотра контента авторизуйтесь',
+  },
+});
+
 // SUCCESS NOTIFICATIONS
 //---------------------------------------------------------------------------------------
 

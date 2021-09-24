@@ -4,6 +4,7 @@ const initionState = {
   isAuth: false,
   name: '',
   email: '',
+  id: '',
 };
 
 export const authReducer = (state = initionState, action) => {
@@ -13,6 +14,7 @@ export const authReducer = (state = initionState, action) => {
         isAuth: false,
         name: '',
         email: '',
+        id: '',
       };
     case SUCCESS_AUTH:
       return {
@@ -20,6 +22,7 @@ export const authReducer = (state = initionState, action) => {
         isAuth: true,
         name: action.payload.name,
         email: action.payload.email,
+        id: action.payload.id,
       };
     default:
       return state;

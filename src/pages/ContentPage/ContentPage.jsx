@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
+import { Switch, Redirect, useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
@@ -9,6 +9,7 @@ import {
   HeaderUser,
   Input,
   Form,
+  ProtectedRoute,
 } from '../../components/index';
 import UIKits from '../../screens/UIKits/UIKits';
 import Home from '../../screens/Home/Home';
@@ -17,7 +18,7 @@ import MediaLibrary from '../../screens/MediaLibrary/MediaLibrary';
 import styles from './ContentPage.module.css';
 import SearchIcon from '../../assets/svg/loupe.svg';
 
-const ContentPage = ({ name }) => {
+const ContentPage = ({ name, isAuth }) => {
   const [value, setValue] = useState('');
   const location = useLocation();
 
@@ -53,10 +54,16 @@ const ContentPage = ({ name }) => {
           <HeaderUser name={name} />
         </ContentHeader>
         <Switch>
-          <Route exact path='/' component={Home} />
-          <Route exact path='/search' component={Search} />
-          <Route exact path='/medialibrary' component={MediaLibrary} />
-          <Route exact path='/uikits' component={UIKits} />
+          <ProtectedRoute isAuth={isAuth} exact path='/' component={Home} />
+          <ProtectedRoute isAuth={isAuth} path='/search'>
+            <Search search={value} />
+          </ProtectedRoute>
+          <ProtectedRoute
+            isAuth={isAuth}
+            path='/medialibrary'
+            component={MediaLibrary}
+          />
+          <ProtectedRoute isAuth={isAuth} path='/uikits' component={UIKits} />
           <Redirect to='/404' />
         </Switch>
       </div>
@@ -69,10 +76,12 @@ const ContentPage = ({ name }) => {
 
 ContentPage.propTypes = {
   name: PropTypes.string.isRequired,
+  isAuth: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   name: state.authReducer.name,
+  isAuth: state.authReducer.isAuth,
 });
 
 export default connect(mapStateToProps)(ContentPage);

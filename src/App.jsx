@@ -6,14 +6,13 @@ import Cookie from 'js-cookie';
 import styles from './App.module.css';
 import NotFound from './pages/NotFound/NotFound';
 import ContentPage from './pages/ContentPage/ContentPage';
-import { LoaderPage, ProtectedRoute, Notification } from './components/index';
+import { LoaderPage, Notification } from './components/index';
 import Login from './auth/pages/Login/Login';
 import Registration from './auth/pages/Registration/Registration';
 import { successAuthAction } from './redux/actions/authAction';
 import { resetNotification } from './redux/actions/notificationAction';
 
 const App = ({
-  isAuth,
   setUserData,
   textNotification,
   typeNotification,
@@ -51,7 +50,7 @@ const App = ({
             <Route exact path='/404' component={NotFound} />
             <Route exact path='/login' component={Login} />
             <Route exact path='/registration' component={Registration} />
-            <ProtectedRoute isAuth={isAuth} path='/' component={ContentPage} />
+            <Route path='/' component={ContentPage} />
           </Switch>
         </>
       )}
@@ -60,7 +59,6 @@ const App = ({
 };
 
 App.propTypes = {
-  isAuth: PropTypes.bool.isRequired,
   setUserData: PropTypes.func.isRequired,
   notification: PropTypes.bool.isRequired,
   textNotification: PropTypes.string.isRequired,

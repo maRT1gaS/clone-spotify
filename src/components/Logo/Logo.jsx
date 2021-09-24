@@ -15,7 +15,7 @@ export const Logo = ({ path }) => {
           style={{ cursor: 'default' }}
         >
           <LogoIcon />
-          <h1 className={styles.logoName}>Spoty</h1>
+          <h1 className={`${styles.logoName} no-copy`}>Spoty</h1>
         </div>
       ) : (
         <Link
@@ -24,7 +24,7 @@ export const Logo = ({ path }) => {
           className={`${styles.logo} ${styles.logoLink}`}
         >
           <LogoIcon />
-          <h1 className={styles.logoName}>Spoty</h1>
+          <h1 className={`${styles.logoName} no-copy`}>Spoty</h1>
         </Link>
       )}
     </>
