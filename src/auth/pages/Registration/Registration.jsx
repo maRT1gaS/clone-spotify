@@ -86,7 +86,7 @@ const Registration = ({ isAuth, onRegistartion, typeNotification }) => {
                   placeholder='Введите вашe имя*'
                   type='text'
                   id='name'
-                  text='Введите ваше имя'
+                  label='Введите ваше имя'
                   preIcon={<UserIcon />}
                 />
 
@@ -96,7 +96,7 @@ const Registration = ({ isAuth, onRegistartion, typeNotification }) => {
                   placeholder='Введите ваш email*'
                   type='email'
                   id='email'
-                  text='Введите ваш email'
+                  label='Введите ваш email'
                   preIcon={<EmailIcon />}
                 />
 
@@ -106,7 +106,7 @@ const Registration = ({ isAuth, onRegistartion, typeNotification }) => {
                   placeholder='Введите ваш пароль*'
                   type='password'
                   id='password'
-                  text='Введите ваш пароль'
+                  label='Введите ваш пароль'
                   preIcon={<PasswordIcon />}
                 />
 
@@ -116,7 +116,7 @@ const Registration = ({ isAuth, onRegistartion, typeNotification }) => {
                   placeholder='Повторите ваш пароль*'
                   type='password'
                   id='passwordcopy'
-                  text='Повторите ваш пароль'
+                  label='Повторите ваш пароль'
                   preIcon={<PasswordIcon />}
                 />
               </div>
@@ -137,8 +137,8 @@ Registration.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  isAuth: state.authReducer.isAuth,
-  typeNotification: state.notificationReducer.typeNotification,
+  isAuth: state.authorization.isAuth,
+  typeNotification: state.notification.typeNotification,
 });
 
 const mapDispatchToProps = (dispatch) => ({

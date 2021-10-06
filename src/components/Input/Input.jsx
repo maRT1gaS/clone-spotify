@@ -9,7 +9,7 @@ export const Input = ({
   placeholder,
   preIcon,
   id,
-  text,
+  label,
   clearIcon,
   value,
   onChange,
@@ -42,7 +42,7 @@ export const Input = ({
       )}
 
       <label className='visually-hidden' htmlFor={id}>
-        {text}
+        {label}
       </label>
 
       <input
@@ -76,19 +76,20 @@ export const Input = ({
 };
 
 Input.propTypes = {
-  type: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(['text', 'password', 'email', 'search']),
   placeholder: PropTypes.string.isRequired,
   preIcon: PropTypes.element,
   clearIcon: PropTypes.bool,
   id: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
   value: PropTypes.string,
   onChange: PropTypes.func,
   handleClear: PropTypes.func,
-  autoComplete: PropTypes.string,
+  autoComplete: PropTypes.oneOf(['on', 'off']),
 };
 
 Input.defaultProps = {
+  type: 'text',
   preIcon: null,
   clearIcon: false,
   handleClear: null,

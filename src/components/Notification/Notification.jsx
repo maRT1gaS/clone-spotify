@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import ReactDOM from 'react-dom';
 import styles from './Notification.module.css';
+import ErrorIcon from '../../assets/svg/error.svg';
+import SuccessIcon from '../../assets/svg/checkmark.svg';
 
 export const Notification = ({ name, type }) =>
   ReactDOM.createPortal(
@@ -12,6 +14,9 @@ export const Notification = ({ name, type }) =>
         [styles.success]: type === 'success',
       })}
     >
+      <div className={styles.notificationSvg}>
+        {type === 'error' ? <ErrorIcon /> : <SuccessIcon />}
+      </div>
       <h2 className={styles.notificationText}>{name}</h2>
     </div>,
     document.getElementById('notification')
@@ -19,5 +24,5 @@ export const Notification = ({ name, type }) =>
 
 Notification.propTypes = {
   name: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(['error', 'success']).isRequired,
 };

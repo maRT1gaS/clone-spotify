@@ -17,7 +17,7 @@ export const CustomLink = ({ children, path, size }) => (
 );
 
 CustomLink.propTypes = {
-  size: PropTypes.string,
+  size: PropTypes.oneOf(['sm', 'bg']),
   children: PropTypes.node.isRequired,
   path: PropTypes.string.isRequired,
 };

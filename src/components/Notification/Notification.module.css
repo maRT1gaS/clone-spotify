@@ -3,6 +3,7 @@
   right: 0;
   bottom: 5rem;
   left: 0;
+  gap: 1rem;
 
   display: flex;
   align-items: center;
@@ -10,9 +11,15 @@
 
   width: max-content;
   margin: auto;
-  padding: 2rem;
+  padding: 1.5rem 2rem;
 
   animation: animNotificationCon 1s linear;
+}
+
+.notificationSvg {
+  width: 4rem;
+  height: 4rem;
+  fill: var( --white );
 }
 
 .error {

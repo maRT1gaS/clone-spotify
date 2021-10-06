@@ -15,7 +15,7 @@ Form.propTypes = {
   children: PropTypes.element.isRequired,
   legend: PropTypes.string.isRequired,
   onSubmit: PropTypes.func,
-  role: PropTypes.string.isRequired,
+  role: PropTypes.oneOf(['search', 'form']).isRequired,
 };
 
 Form.defaultProps = {

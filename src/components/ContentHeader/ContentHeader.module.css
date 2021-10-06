@@ -1,9 +1,14 @@
+@import '../../styles/variables.css';
+
 .contentHeader {
   position: sticky;
+  z-index: 2;
   top: 0;
 
   width: 100%;
   padding: 1rem;
+
+  background-color: var( --background-dark );
 }
 
 .header {

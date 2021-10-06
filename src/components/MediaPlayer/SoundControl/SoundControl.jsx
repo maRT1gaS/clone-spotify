@@ -1,0 +1,65 @@
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import styles from './SoundControl.module.css';
+import NoSoundIcon from '../../../assets/svg/no-sound.svg';
+import PlayingPlaylistIcon from '../../../assets/svg/playlist.svg';
+import SoundIcon from '../../../assets/svg/sound.svg';
+import { updateVolume } from '../../../redux/actions/playingSongAction';
+
+function SoundControl({ changeVolume, volState, setVolState }) {
+  const dispatch = useDispatch();
+  const [oldVolume, setOldVolume] = useState('');
+
+  const handleVolume = () => {
+    dispatch(updateVolume(volState));
+  };
+
+  const handleChangeVolume = () => {
+    if (oldVolume) {
+      dispatch(updateVolume(oldVolume));
+      setVolState(oldVolume);
+      changeVolume(oldVolume);
+      setOldVolume('');
+    } else {
+      setVolState('0');
+      setOldVolume(volState);
+      dispatch(updateVolume('0'));
+      changeVolume('0');
+    }
+  };
+  return (
+    <div className={styles.otherControls}>
+      <button className={styles.playingPlaylistSvg} type='button'>
+        <PlayingPlaylistIcon />
+      </button>
+      <div className={styles.soundController}>
+        <button
+          type='button'
+          onClick={() => handleChangeVolume()}
+          className={styles.soundIcon}
+        >
+          {volState === '0' ? <NoSoundIcon /> : <SoundIcon />}
+        </button>
+        <input
+          className={styles.range}
+          type='range'
+          min='0'
+          max='1'
+          step='0.1'
+          onMouseUp={() => handleVolume()}
+          value={volState}
+          onChange={(event) => changeVolume(event.target.value)}
+        />
+      </div>
+    </div>
+  );
+}
+
+SoundControl.propTypes = {
+  changeVolume: PropTypes.func.isRequired,
+  volState: PropTypes.string.isRequired,
+  setVolState: PropTypes.func.isRequired,
+};
+
+export default SoundControl;

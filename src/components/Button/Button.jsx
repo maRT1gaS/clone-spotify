@@ -28,7 +28,7 @@ export const Button = ({ children, type, onClick }) => {
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,
-  type: PropTypes.string,
+  type: PropTypes.oneOf(['submit', 'button']),
   onClick: PropTypes.func,
 };
 

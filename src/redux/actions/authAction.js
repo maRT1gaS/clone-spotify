@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SUCCESS_AUTH, START_AUTH } from '../actionTypes';
+import { SUCCESS_AUTH, START_AUTH, LOG_OUT } from '../actionTypes';
 import {
   errorPassEmailAction,
   errorNetworkAction,
@@ -17,8 +17,11 @@ export const successAuthAction = (data) => ({
     isAuth: true,
     name: data.name,
     email: data.email,
-    id: data.id,
   },
+});
+
+export const logOutAction = () => ({
+  type: LOG_OUT,
 });
 
 export const authorisationAction = (authData) => (dispatch) => {
@@ -33,12 +36,11 @@ export const authorisationAction = (authData) => (dispatch) => {
         dispatch(errorPassEmailAction());
       } else {
         dispatch(successAuth());
-        const userDara = {
+        const userData = {
           name: res.data.name,
           email: res.data.email,
-          id: res.data.id,
         };
-        sessionStorage.setItem('userDara', JSON.stringify(userDara));
+        sessionStorage.setItem('userData', JSON.stringify(userData));
         dispatch(successAuthAction(res.data));
       }
     })

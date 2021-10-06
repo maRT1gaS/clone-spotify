@@ -10,11 +10,19 @@ import {
   ContentNotification,
 } from '../../components/index';
 import { loadingAction } from '../../redux/actions/loadingAction';
+import { ALL } from '../../redux/actionTypes';
 
-const Search = ({ search, isLoading, loadingSearchData, searchData }) => {
+const Search = ({
+  search,
+  isLoading,
+  loadingSearchData,
+  songs,
+  artists,
+  albums,
+}) => {
   useEffect(() => {
-    loadingSearchData(`/search?query=${search}`, 'SEARCH');
-  }, [loadingSearchData, search, searchData.length]);
+    loadingSearchData(`/search?query=${search}`, ALL);
+  }, [loadingSearchData, search]);
 
   return (
     <>
@@ -26,22 +34,16 @@ const Search = ({ search, isLoading, loadingSearchData, searchData }) => {
           <Loader />
         ) : (
           <>
-            {searchData?.songs && searchData.songs.length > 0 && (
-              <MusicList name='Песни' music={searchData.songs} />
+            {songs.length > 0 && <MusicList name='Песни' songs={songs} />}
+            {artists.length > 0 && (
+              <CardsList name='Артисты' type='artist' data={artists} />
             )}
-            {searchData?.artists && searchData.artists.length > 0 && (
-              <CardsList
-                name='Артисты'
-                type='artist'
-                data={searchData.artists}
-              />
+            {albums.length > 0 && (
+              <CardsList name='Альбомы' type='album' data={albums} />
             )}
-            {searchData?.albums && searchData.albums.length > 0 && (
-              <CardsList name='Альбомы' type='album' data={searchData.albums} />
-            )}
-            {searchData?.songs.length === 0 &&
-              searchData?.artists.length === 0 &&
-              searchData?.albums.length === 0 && (
+            {songs.length === 0 &&
+              artists.length === 0 &&
+              albums.length === 0 && (
                 <ContentNotification title='Ничего не найдено...' />
               )}
           </>
@@ -54,13 +56,17 @@ const Search = ({ search, isLoading, loadingSearchData, searchData }) => {
 Search.propTypes = {
   search: PropTypes.string.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  searchData: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  songs: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  albums: PropTypes.arrayOf(PropTypes.object).isRequired,
+  artists: PropTypes.arrayOf(PropTypes.object).isRequired,
   loadingSearchData: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  isLoading: state.loadingReducer.isLoading,
-  searchData: state.loadingReducer.searchData,
+  isLoading: state.loadingData.isLoading,
+  songs: state.loadingData.songs,
+  artists: state.loadingData.artists,
+  albums: state.loadingData.albums,
 });
 
 const mapDispatchToProps = (dispatch) => ({

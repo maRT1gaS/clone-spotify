@@ -1,20 +1,18 @@
-import { SUCCESS_AUTH, START_AUTH } from '../actionTypes';
+import { SUCCESS_AUTH, START_AUTH, LOG_OUT } from '../actionTypes';
 
 const initionState = {
   isAuth: false,
   name: '',
   email: '',
-  id: '',
 };
 
-export const authReducer = (state = initionState, action) => {
+export const authorization = (state = initionState, action) => {
   switch (action.type) {
     case START_AUTH:
       return {
         isAuth: false,
         name: '',
         email: '',
-        id: '',
       };
     case SUCCESS_AUTH:
       return {
@@ -22,7 +20,13 @@ export const authReducer = (state = initionState, action) => {
         isAuth: true,
         name: action.payload.name,
         email: action.payload.email,
-        id: action.payload.id,
+      };
+    case LOG_OUT:
+      return {
+        ...state,
+        isAuth: false,
+        name: '',
+        email: '',
       };
     default:
       return state;
