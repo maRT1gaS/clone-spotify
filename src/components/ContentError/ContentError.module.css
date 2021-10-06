@@ -1,0 +1,42 @@
+@import '../../styles/variables.css';
+
+.error {
+  position: absolute;
+  z-index: 1;
+
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+  padding: 1rem 2rem;
+
+  animation: errorAnim 2s linear;
+
+  background-color: #900;
+}
+
+.errorContent {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.errorSvg {
+  width: 4rem;
+  height: 4rem;
+  fill: var( --white );
+}
+
+.errorTitle {
+  font-size: 2rem;
+}
+
+@keyframes errorAnim {
+  from {
+    transform: translateY( -8rem );
+  }
+
+  to {
+    transform: translateY( 0 );
+  }
+}

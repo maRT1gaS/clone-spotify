@@ -1,26 +1,24 @@
 @import '../../../styles/variables.css';
 
-.musicItem {
+.songItem {
   display: flex;
   align-items: center;
   justify-content: space-between;
 
   padding: 0.5rem 1.5rem;
-
-  cursor: pointer;
 }
 
-.musicItem:hover {
+.songItem:hover {
   border-radius: 1rem;
   background-color: rgba( 255, 255, 255, 0.1 );
 }
 
-.musicItemContent {
+.songItemContent {
   display: flex;
   align-items: center;
 }
 
-.musicItemSVG {
+.songItemSVG {
   width: 2rem;
   height: 2rem;
 }
@@ -30,41 +28,37 @@
 }
 
 .unHover {
-  fill: rgba( 255, 255, 255, 0.7 );
+  fill: var( --white-opacity );
 }
 
-.musicItemImg {
+.songItemImg {
   width: 5rem;
   height: 5rem;
   margin-left: 1.5rem;
 }
 
-.musicItemInfo {
+.songItemInfo {
   margin-left: 1.5rem;
 }
 
-.musicItemName {
+.songItemName {
   color: rgba( 255, 255, 255, 0.9 );
 
   font-size: 1.7rem;
 }
 
-.musicItemSecondInfo {
+.songItemSecondInfo {
   margin-top: 0.5rem;
-
-  color: rgba( 255, 255, 255, 0.7 );
-
-  font-size: 1.3rem;
 }
 
-.musicItemTime {
-  color: rgba( 255, 255, 255, 0.7 );
+.songItemTime {
+  color: var( --white-opacity );
 
   font-size: 1.7rem;
 }
 
-.musicItem:hover .musicItemSecondInfo,
-.musicItem:hover .musicItemTime,
-.musicItem:hover .musicItemName {
+.songItem:hover .songItemSecondInfo,
+.songItem:hover .songItemTime,
+.songItem:hover .songItemName {
   color: var( --white );
 }

@@ -37,6 +37,7 @@
             "required": {
               "some": ["nesting", "id"]
             }
-          }]
+          }],
+          "react/prefer-stateless-function": "off"
     }
 }

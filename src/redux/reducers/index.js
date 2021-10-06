@@ -1,12 +1,14 @@
 import { combineReducers } from 'redux';
-import { authReducer } from './authReducer';
-import { notificationReducer } from './notificationReducer';
-import { loadingReducer } from './loadingReducer';
+import { authorization } from './authorization';
+import { notification } from './notification';
+import { loadingData } from './loadingData';
+import { playingSong } from './playingSong';
 
 const rootReducer = combineReducers({
-  authReducer,
-  notificationReducer,
-  loadingReducer,
+  authorization,
+  notification,
+  loadingData,
+  playingSong,
 });
 
 export default rootReducer;

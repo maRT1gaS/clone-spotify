@@ -4,13 +4,12 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { ContentWrapper, MusicList, Loader } from '../../components/index';
 import { loadingAction } from '../../redux/actions/loadingAction';
+import { SONGS } from '../../redux/actionTypes';
 
-const Home = ({ loadingMusic, isLoading, recomendationMusic }) => {
+const Home = ({ loadingSongs, isLoading, songs }) => {
   useEffect(() => {
-    if (recomendationMusic.length === 0) {
-      loadingMusic('/recommendations', 'HOME');
-    }
-  }, [loadingMusic, recomendationMusic.length]);
+    loadingSongs('/recommendations', SONGS);
+  }, [loadingSongs]);
 
   return (
     <>
@@ -21,7 +20,7 @@ const Home = ({ loadingMusic, isLoading, recomendationMusic }) => {
         {isLoading ? (
           <Loader />
         ) : (
-          <MusicList name='Рекомендации' music={recomendationMusic} />
+          <MusicList name='Рекомендации' songs={songs} />
         )}
       </ContentWrapper>
     </>
@@ -29,18 +28,18 @@ const Home = ({ loadingMusic, isLoading, recomendationMusic }) => {
 };
 
 Home.propTypes = {
-  loadingMusic: PropTypes.func.isRequired,
+  loadingSongs: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  recomendationMusic: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  songs: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  isLoading: state.loadingReducer.isLoading,
-  recomendationMusic: state.loadingReducer.recomendationMusic,
+  isLoading: state.loadingData.isLoading,
+  songs: state.loadingData.songs,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loadingMusic: (url, type) => dispatch(loadingAction(url, type)),
+  loadingSongs: (url, type) => dispatch(loadingAction(url, type)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

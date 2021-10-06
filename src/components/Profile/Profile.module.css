@@ -1,0 +1,25 @@
+@import '../../styles/variables.css';
+
+.profile {
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+}
+
+.figure {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.img {
+  width: 40rem;
+  height: 40rem;
+  object-fit: cover;
+}
+
+.figcaption {
+  font-size: 3rem;
+}

@@ -6,7 +6,7 @@ const initionState = {
   textNotification: '',
 };
 
-export const notificationReducer = (state = initionState, action) => {
+export const notification = (state = initionState, action) => {
   switch (action.type) {
     case ERROR:
       return {

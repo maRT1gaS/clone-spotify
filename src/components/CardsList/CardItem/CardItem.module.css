@@ -1,6 +1,6 @@
 .container {
-  min-width: 18rem;
-  max-width: 18rem;
+  width: 18rem;
+  height: 22rem;
   padding: 2rem 1rem;
 
   cursor: pointer;

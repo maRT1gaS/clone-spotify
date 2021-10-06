@@ -24,7 +24,7 @@ const NotFound = ({ isAuth }) => (
 );
 
 const mapStateToProps = (state) => ({
-  isAuth: state.authReducer.isAuth,
+  isAuth: state.authorization.isAuth,
 });
 
 NotFound.propTypes = {

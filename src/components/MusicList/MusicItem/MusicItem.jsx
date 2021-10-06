@@ -1,60 +1,75 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import { useDispatch, useSelector } from 'react-redux';
+import Loader from 'react-loader-spinner';
 import styles from './MusicItem.module.css';
 import MusicNoteIcon from '../../../assets/svg/music-note.svg';
 import PlayIcon from '../../../assets/svg/play.svg';
+import { startSong } from '../../../redux/actions/playingSongAction';
+import { SongLink } from '../../SongLink/SongLink';
 
-export const MusicItem = ({
-  time,
-  imageUrl,
-  nameMusic,
-  nameArtist,
-  nameAlbum,
-}) => {
+export const MusicItem = ({ song, playingPlaylist }) => {
   const [hover, setHover] = useState(false);
+  const dispatch = useDispatch();
+
+  const { currentSong, playSong: isPlaySong } = useSelector(
+    (state) => state.playingSong
+  );
+
+  const playSong = (songPlay, playlist) => {
+    dispatch(startSong(songPlay, playlist));
+  };
   return (
     <div
       role='presentation'
+      onDoubleClick={() => playSong(song, playingPlaylist)}
       onPointerEnter={() => setHover(true)}
       onPointerLeave={() => setHover(false)}
-      className={`${styles.musicItem} no-copy`}
+      className={`${styles.songItem} no-copy`}
     >
-      <div className={styles.musicItemContent}>
-        {hover ? (
-          <PlayIcon className={`${styles.musicItemSVG} ${styles.hover}`} />
+      <div className={styles.songItemContent}>
+        {currentSong?.id && currentSong.id === song.id && isPlaySong ? (
+          <Loader type='Audio' color='#28BF30' width={20} height={20} />
         ) : (
-          <MusicNoteIcon
-            className={`${styles.musicItemSVG} ${styles.unHover}`}
-          />
+          <>
+            {hover ? (
+              <PlayIcon className={`${styles.songItemSVG} ${styles.hover}`} />
+            ) : (
+              <MusicNoteIcon
+                className={`${styles.songItemSVG} ${styles.unHover}`}
+              />
+            )}
+          </>
         )}
-        <div className={styles.musicItemImgCon}>
+        <div className={styles.songItemImgCon}>
           <img
-            className={styles.musicItemImg}
-            src={`/api${imageUrl}`}
-            alt={nameAlbum}
+            className={styles.songItemImg}
+            src={`/api${song.album.imageUrl}`}
+            alt={song.album.name}
           />
         </div>
-        <div className={styles.musicItemInfo}>
-          <h3 className={styles.musicItemName}>{nameMusic}</h3>
-          <div className={styles.musicItemSecondInfo}>
-            <span>{nameArtist}</span>
+        <div className={styles.songItemInfo}>
+          <h3 className={styles.songItemName}>{song.name}</h3>
+          <div className={styles.songItemSecondInfo}>
+            <SongLink path={`/artist/${song.artist.id}`}>
+              {song.artist.name}
+            </SongLink>
             &ensp;&bull;&ensp;
-            <span>{nameAlbum}</span>
+            <SongLink path={`/album/${song.album.id}`}>
+              {song.album.name}
+            </SongLink>
           </div>
         </div>
       </div>
-      <div className={styles.musicItemTime}>
-        <span>{moment().startOf('day').second(time).format('mm:ss')}</span>
+      <div className={styles.songItemTime}>
+        <span>{moment().minute(0).second(song.duration).format('mm:ss')}</span>
       </div>
     </div>
   );
 };
 
 MusicItem.propTypes = {
-  time: PropTypes.number.isRequired,
-  imageUrl: PropTypes.string.isRequired,
-  nameMusic: PropTypes.string.isRequired,
-  nameArtist: PropTypes.string.isRequired,
-  nameAlbum: PropTypes.string.isRequired,
+  song: PropTypes.shape().isRequired,
+  playingPlaylist: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };

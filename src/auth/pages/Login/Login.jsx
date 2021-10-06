@@ -69,7 +69,7 @@ const Login = ({ onAuthorisation, isAuth, typeNotification }) => {
                 placeholder='Введите ваш email*'
                 type='email'
                 id='email'
-                text='Введите ваш email'
+                label='Введите ваш email'
                 preIcon={<EmailIcon />}
               />
 
@@ -79,7 +79,7 @@ const Login = ({ onAuthorisation, isAuth, typeNotification }) => {
                 placeholder='Введите ваш пароль*'
                 type='password'
                 id='password'
-                text='Введите ваш пароль'
+                label='Введите ваш пароль'
                 preIcon={<PasswordIcon />}
               />
               <Button type='submit'>Войти</Button>
@@ -103,8 +103,8 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
-  isAuth: state.authReducer.isAuth,
-  typeNotification: state.notificationReducer.typeNotification,
+  isAuth: state.authorization.isAuth,
+  typeNotification: state.notification.typeNotification,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

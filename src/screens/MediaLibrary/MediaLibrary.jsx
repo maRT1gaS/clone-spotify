@@ -9,11 +9,12 @@ import {
   ContentNotification,
 } from '../../components/index';
 import { loadingAction } from '../../redux/actions/loadingAction';
+import { LIBRARY } from '../../redux/actionTypes';
 
-const MediaLibrary = ({ librarySongs, isLoading, loadingMusic, idUser }) => {
+const MediaLibrary = ({ library, isLoading, loadingSongs }) => {
   useEffect(() => {
-    loadingMusic('/library', 'LIBRARY', idUser);
-  }, [idUser, loadingMusic]);
+    loadingSongs('/library', LIBRARY);
+  }, [loadingSongs]);
   return (
     <>
       <Helmet>
@@ -24,8 +25,8 @@ const MediaLibrary = ({ librarySongs, isLoading, loadingMusic, idUser }) => {
           <Loader />
         ) : (
           <>
-            {librarySongs.length > 0 ? (
-              <MusicList name='Твои аудиозаписи' music={librarySongs} />
+            {library?.library && library.library.length > 0 ? (
+              <MusicList name='Твои аудиозаписи' songs={library.library} />
             ) : (
               <ContentNotification title='У вас нет аудиозаписей' />
             )}
@@ -37,21 +38,22 @@ const MediaLibrary = ({ librarySongs, isLoading, loadingMusic, idUser }) => {
 };
 
 MediaLibrary.propTypes = {
-  loadingMusic: PropTypes.func.isRequired,
+  loadingSongs: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  librarySongs: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  idUser: PropTypes.string.isRequired,
+  library: PropTypes.shape({
+    id: PropTypes.string,
+    library: PropTypes.arrayOf(PropTypes.object),
+  }).isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  isLoading: state.loadingReducer.isLoading,
-  librarySongs: state.loadingReducer.librarySongs,
-  idUser: state.authReducer.id,
+  isLoading: state.loadingData.isLoading,
+  library: state.loadingData.library,
+  idUser: state.authorization.id,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loadingMusic: (url, type, idUser) =>
-    dispatch(loadingAction(url, type, idUser)),
+  loadingSongs: (url, type) => dispatch(loadingAction(url, type)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MediaLibrary);

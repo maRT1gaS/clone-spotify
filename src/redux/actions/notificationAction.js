@@ -13,7 +13,7 @@ export const errorPassEmailAction = () => ({
 export const errorNetworkAction = () => ({
   type: ERROR,
   payload: {
-    textNotification: 'Проверьте подключение к интернету.',
+    textNotification: 'Ошибка!',
   },
 });
 
@@ -38,6 +38,13 @@ export const errorNotAuth = () => ({
   },
 });
 
+export const errorSongNotFound = () => ({
+  type: ERROR,
+  payload: {
+    textNotification: 'Данная аудиозапись недоступна.',
+  },
+});
+
 // SUCCESS NOTIFICATIONS
 //---------------------------------------------------------------------------------------
 
@@ -51,7 +58,14 @@ export const successAuth = () => ({
 export const successRegistration = () => ({
   type: SUCCESS,
   payload: {
-    textNotification: 'Вы успешно зарегестрировались',
+    textNotification: 'Вы успешно зарегестрировались.',
+  },
+});
+
+export const successExit = () => ({
+  type: SUCCESS,
+  payload: {
+    textNotification: 'Вы успешно вышли.',
   },
 });
 
