@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Switch, Redirect, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
@@ -8,38 +8,52 @@ import {
   HeaderUser,
   Input,
   Form,
-  ProtectedRoute,
   ContentError,
+  ContentWrapper,
 } from '../../components/index';
-import Home from '../../screens/Home/Home';
-import Search from '../../screens/Search/Search';
-import MediaLibrary from '../../screens/MediaLibrary/MediaLibrary';
-import Artist from '../../screens/Artist/Artist';
-import Album from '../../screens/Album/Album';
 import styles from './ContentPage.module.css';
 import SearchIcon from '../../assets/svg/loupe.svg';
 import MediaPlayer from '../../components/MediaPlayer/MediaPlayer';
+import ClearIcon from '../../assets/svg/delete.svg';
+import ContentPageRouting from '../../router/ContentPageRouting';
 
-const ContentPage = ({ name, isAuth, isError, textError }) => {
+const ContentPage = ({ name, isError, textError }) => {
   const [value, setValue] = useState('');
+  const [visible, setVisible] = useState(false);
+  const [isFocus, setIsFocus] = useState(false);
   const location = useLocation();
+  const contentWrapperRef = React.createRef();
 
   useEffect(() => {
     if (location.pathname === '/search') {
       const searchInput = document.getElementById('search');
       searchInput.focus();
     }
-  });
+  }, [location.pathname]);
 
   const handleChange = (e) => {
     setValue(e.target.value);
+  };
+
+  const skipNav = (key) => {
+    if (key.code === 'Enter' || key.code === 'Space') {
+      key.preventDefault();
+      contentWrapperRef.current.focus();
+      setIsFocus(true);
+      return;
+    }
+    setVisible(false);
   };
 
   const handleClear = () => setValue('');
 
   return (
     <div className={`${styles.wrapperContent} fullscreen`}>
-      <VerticalNav style={{ gridArea: 'verticalNav' }} />
+      <VerticalNav
+        onKeyDown={(key) => skipNav(key)}
+        setVisible={setVisible}
+        visible={visible}
+      />
       <div className={styles.contentWrapper}>
         <ContentHeader>
           <div style={{ flex: '0 1 30rem' }}>
@@ -54,41 +68,23 @@ const ContentPage = ({ name, isAuth, isError, textError }) => {
                   preIcon={<SearchIcon />}
                   placeholder='Исполнитель, трек или подкаст'
                   clearIcon
-                  handleClear={handleClear}
+                  onClick={handleClear}
                   autoComplete='off'
+                  secondIcon={value.length ? <ClearIcon /> : null}
                 />
               </Form>
             )}
           </div>
           <HeaderUser name={name} />
         </ContentHeader>
-        <div style={{ position: 'relative' }}>
+        <ContentWrapper
+          onBlur={() => setIsFocus(false)}
+          isFocus={isFocus}
+          ref={contentWrapperRef}
+        >
           {isError && <ContentError title={textError} />}
-          <Switch>
-            <ProtectedRoute isAuth={isAuth} exact path='/' component={Home} />
-            <ProtectedRoute isAuth={isAuth} path='/search'>
-              <Search search={value} />
-            </ProtectedRoute>
-            <ProtectedRoute
-              isAuth={isAuth}
-              path='/medialibrary'
-              component={MediaLibrary}
-            />
-            <ProtectedRoute
-              isAuth={isAuth}
-              exact
-              path='/artist/:id'
-              component={Artist}
-            />
-            <ProtectedRoute
-              isAuth={isAuth}
-              exact
-              path='/album/:id'
-              component={Album}
-            />
-            <Redirect to='/404' />
-          </Switch>
-        </div>
+          <ContentPageRouting value={value} />
+        </ContentWrapper>
       </div>
       <MediaPlayer />
     </div>
@@ -97,16 +93,12 @@ const ContentPage = ({ name, isAuth, isError, textError }) => {
 
 ContentPage.propTypes = {
   name: PropTypes.string.isRequired,
-  isAuth: PropTypes.bool.isRequired,
-  // currentSong: PropTypes.shape().isRequired,
   isError: PropTypes.bool.isRequired,
   textError: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   name: state.authorization.name,
-  isAuth: state.authorization.isAuth,
-  // currentSong: state.playingSong.currentSong,
   isError: state.loadingData.isError,
   textError: state.loadingData.textError,
 });

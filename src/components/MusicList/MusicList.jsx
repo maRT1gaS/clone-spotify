@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { MusicItem } from './MusicItem/MusicItem';
+import { MusicItem } from '../MusicItem/MusicItem';
 import { ContentTitle } from '../ContentTitle/ContentTitle';
 
 export const MusicList = ({ songs, name }) => (

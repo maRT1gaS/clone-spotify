@@ -2,25 +2,26 @@ import {
   START_LOADING,
   SUCCESS_LOADING,
   ERROR_LOADING,
-  SONGS,
-  ARTISTS,
-  ALBUMS,
-  ALL,
   ALBUM,
   ARTIST,
   LIBRARY,
+  HOME,
+  SEARCH,
 } from '../actionTypes';
 
 const initionState = {
   isLoading: false,
   textError: '',
   isError: false,
-  songs: [],
   album: {},
-  albums: [],
   artist: {},
-  artists: [],
-  library: {},
+  search: {
+    songs: [],
+    artists: [],
+    albums: [],
+  },
+  library: [],
+  home: [],
 };
 
 export const loadingData = (state = initionState, action) => {
@@ -34,29 +35,17 @@ export const loadingData = (state = initionState, action) => {
       };
     case SUCCESS_LOADING:
       switch (action.payload.type) {
-        case SONGS:
-          return {
-            ...state,
-            isLoading: false,
-            songs: action.payload.data,
-          };
-        case ARTISTS:
-          return {
-            ...state,
-            isLoading: false,
-            artists: action.payload.data,
-          };
-        case ALBUMS:
-          return {
-            ...state,
-            isLoading: false,
-            albums: action.payload.data,
-          };
         case LIBRARY:
           return {
             ...state,
             isLoading: false,
             library: action.payload.data,
+          };
+        case HOME:
+          return {
+            ...state,
+            isLoading: false,
+            home: action.payload.data,
           };
         case ALBUM:
           return {
@@ -70,14 +59,11 @@ export const loadingData = (state = initionState, action) => {
             isLoading: false,
             artist: action.payload.data,
           };
-        // ALL - SONGS, ALBUMS, ARTISTS
-        case ALL:
+        case SEARCH:
           return {
             ...state,
             isLoading: false,
-            songs: action.payload.data.songs,
-            albums: action.payload.data.albums,
-            artists: action.payload.data.artists,
+            search: action.payload.data,
           };
         default:
           return state;

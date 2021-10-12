@@ -1,4 +1,4 @@
-@import '../../../styles/variables.css';
+@import '../../styles/variables.css';
 
 .songItem {
   display: flex;
@@ -6,6 +6,10 @@
   justify-content: space-between;
 
   padding: 0.5rem 1.5rem;
+
+  border-radius: 1rem;
+
+  outline: none;
 }
 
 .songItem:hover {
@@ -23,6 +27,14 @@
   height: 2rem;
 }
 
+.selectedSong {
+  background-color: rgba( 255, 255, 255, 0.1 );
+}
+
+.selectedSongSvg {
+  fill: var( --green );
+}
+
 .hover {
   fill: var( --white );
 }
@@ -35,6 +47,8 @@
   width: 5rem;
   height: 5rem;
   margin-left: 1.5rem;
+  object-fit: cover;
+  object-position: center;
 }
 
 .songItemInfo {

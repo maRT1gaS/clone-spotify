@@ -18,6 +18,7 @@
   width: 40rem;
   height: 40rem;
   object-fit: cover;
+  object-position: center;
 }
 
 .figcaption {

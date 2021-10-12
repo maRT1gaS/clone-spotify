@@ -3,6 +3,7 @@ import { authorization } from './authorization';
 import { notification } from './notification';
 import { loadingData } from './loadingData';
 import { playingSong } from './playingSong';
+import { LOG_OUT } from '../actionTypes';
 
 const rootReducer = combineReducers({
   authorization,
@@ -11,4 +12,5 @@ const rootReducer = combineReducers({
   playingSong,
 });
 
-export default rootReducer;
+export default (state, action) =>
+  rootReducer(action.type === LOG_OUT ? undefined : state, action);

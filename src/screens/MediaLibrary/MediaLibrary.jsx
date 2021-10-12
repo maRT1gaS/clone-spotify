@@ -2,37 +2,34 @@ import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {
-  ContentWrapper,
-  MusicList,
-  Loader,
-  ContentNotification,
-} from '../../components/index';
+import { MusicList, Loader, ContentNotification } from '../../components/index';
 import { loadingAction } from '../../redux/actions/loadingAction';
 import { LIBRARY } from '../../redux/actionTypes';
 
 const MediaLibrary = ({ library, isLoading, loadingSongs }) => {
   useEffect(() => {
-    loadingSongs('/library', LIBRARY);
-  }, [loadingSongs]);
+    if (library.length === 0) {
+      loadingSongs('/library', LIBRARY);
+    }
+  }, [library.length, loadingSongs]);
   return (
     <>
       <Helmet>
         <title>Моя медиатека</title>
       </Helmet>
-      <ContentWrapper>
+      <>
         {isLoading ? (
           <Loader />
         ) : (
           <>
-            {library?.library && library.library.length > 0 ? (
-              <MusicList name='Твои аудиозаписи' songs={library.library} />
+            {library.length > 0 ? (
+              <MusicList name='Твои аудиозаписи' songs={library} />
             ) : (
               <ContentNotification title='У вас нет аудиозаписей' />
             )}
           </>
         )}
-      </ContentWrapper>
+      </>
     </>
   );
 };
@@ -40,10 +37,7 @@ const MediaLibrary = ({ library, isLoading, loadingSongs }) => {
 MediaLibrary.propTypes = {
   loadingSongs: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  library: PropTypes.shape({
-    id: PropTypes.string,
-    library: PropTypes.arrayOf(PropTypes.object),
-  }).isRequired,
+  library: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
 
 const mapStateToProps = (state) => ({

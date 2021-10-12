@@ -2,15 +2,16 @@ import {
   START_SONG,
   CONTROL_SONG,
   UPDATE_VOLUME,
-  PLAYING_PLAYLIST_OPEN,
+  REPEAT_TOGGLE,
 } from '../actionTypes';
 
 const initionState = {
   currentSong: {},
   playingPlaylist: [],
   volume: '0.5',
-  playSong: false,
-  playingPlaylistOpen: false,
+  isPlayingSong: false,
+  isRepeat: false,
+  event: '',
 };
 
 export const playingSong = (state = initionState, action) => {
@@ -20,28 +21,30 @@ export const playingSong = (state = initionState, action) => {
         return {
           ...state,
           currentSong: action.payload.data.currentSong,
+          event: action.payload.event,
         };
       }
       return {
         ...state,
         playingPlaylist: action.payload.data.playingPlaylist,
         currentSong: action.payload.data.currentSong,
+        event: action.payload.event,
       };
 
     case CONTROL_SONG:
       return {
         ...state,
-        playSong: !state.playSong,
+        isPlayingSong: !state.isPlayingSong,
       };
     case UPDATE_VOLUME:
       return {
         ...state,
         volume: action.payload.value,
       };
-    case PLAYING_PLAYLIST_OPEN:
+    case REPEAT_TOGGLE:
       return {
         ...state,
-        playingPlaylistOpen: !state.playingPlaylistOpen,
+        isRepeat: !state.isRepeat,
       };
     default:
       return state;

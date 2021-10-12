@@ -7,7 +7,7 @@ export class SongLink extends React.Component {
   render() {
     const { path, children } = this.props;
     return (
-      <Link className={styles.link} to={path}>
+      <Link className={styles.link} to={path} tabIndex='-1'>
         {children}
       </Link>
     );

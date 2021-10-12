@@ -1,6 +1,11 @@
-import { START_SONG, CONTROL_SONG, UPDATE_VOLUME } from '../actionTypes';
+import {
+  START_SONG,
+  CONTROL_SONG,
+  UPDATE_VOLUME,
+  REPEAT_TOGGLE,
+} from '../actionTypes';
 
-export const startSong = (currentSong, playingPlaylist) => {
+export const startSong = (currentSong, playingPlaylist, event) => {
   const data = {
     currentSong,
     playingPlaylist,
@@ -10,12 +15,17 @@ export const startSong = (currentSong, playingPlaylist) => {
     type: START_SONG,
     payload: {
       data,
+      event,
     },
   };
 };
 
 export const controlSong = () => ({
   type: CONTROL_SONG,
+});
+
+export const toggleRepeat = () => ({
+  type: REPEAT_TOGGLE,
 });
 
 export const updateVolume = (value) => {

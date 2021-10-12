@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Cookie from 'js-cookie';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import cn from 'classnames';
 import { Logo } from '../Logo/Logo';
 import Navigation from '../Navigation/Navigation';
 import styles from './VerticalNav.module.css';
@@ -11,9 +12,19 @@ import LogOutIcon from '../../assets/svg/log-out.svg';
 import { logOutAction } from '../../redux/actions/authAction';
 import { successExit } from '../../redux/actions/notificationAction';
 
-export const VerticalNav = ({ style }) => {
+export const VerticalNav = ({ onKeyDown, setVisible, visible }) => {
+  const [isFocus, setIsFocus] = useState(false);
+
+  const setOutline = (key) => {
+    if (key.code === 'Tab') {
+      setIsFocus(true);
+    }
+  };
+
   const history = useHistory();
+  const location = useLocation();
   const dispatch = useDispatch();
+
   const logOut = () => {
     Cookie.remove('TOKEN');
     sessionStorage.removeItem('userData');
@@ -22,14 +33,39 @@ export const VerticalNav = ({ style }) => {
     dispatch(successExit());
     history.push('/login');
   };
+
   return (
-    <div className={styles.navWrapper} style={style}>
+    <div className={styles.navWrapper}>
+      {!(location.pathname === '/search') && (
+        <a
+          className={cn(styles.skipNav, {
+            [styles.visible]: visible,
+            isFocus: visible,
+          })}
+          onFocus={() => setVisible(true)}
+          onBlur={() => setVisible(false)}
+          onKeyDown={onKeyDown}
+          tabIndex='0'
+          href='true'
+        >
+          Перейти к песням
+        </a>
+      )}
       <div className={styles.navContent}>
         <Logo />
         <Navigation points={navItems} />
       </div>
       <div className={styles.logOutCon}>
-        <button type='button' onClick={logOut} className={styles.logOut}>
+        <button
+          onBlur={() => setIsFocus(false)}
+          onKeyUp={setOutline}
+          tabIndex='0'
+          type='button'
+          onClick={logOut}
+          className={cn(styles.logOut, {
+            isFocus,
+          })}
+        >
           <LogOutIcon />
           Выйти
         </button>
@@ -39,9 +75,7 @@ export const VerticalNav = ({ style }) => {
 };
 
 VerticalNav.propTypes = {
-  style: PropTypes.shape(),
-};
-
-VerticalNav.defaultProps = {
-  style: null,
+  onKeyDown: PropTypes.func.isRequired,
+  setVisible: PropTypes.func.isRequired,
+  visible: PropTypes.bool.isRequired,
 };

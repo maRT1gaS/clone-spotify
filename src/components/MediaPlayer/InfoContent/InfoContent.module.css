@@ -8,6 +8,7 @@
   width: 6rem;
   height: 6rem;
   object-fit: cover;
+  object-position: center;
 }
 
 .infoContentText {
@@ -31,16 +32,19 @@
   height: 2rem;
 
   cursor: pointer;
+  transition: 0.3s linear;
+
+  opacity: 0.7;
 }
 
 .noLike {
-  fill: var( --white-opacity );
-}
-
-.noLike:hover {
   fill: var( --white );
 }
 
 .like {
   fill: #C00;
+}
+
+.infoContentSvg:hover {
+  opacity: 1;
 }

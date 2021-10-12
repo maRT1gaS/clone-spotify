@@ -3,7 +3,6 @@ import { Helmet } from 'react-helmet-async';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-  ContentWrapper,
   MusicList,
   Loader,
   Profile,
@@ -19,8 +18,11 @@ class Artist extends React.Component {
         params: { id },
       },
       loadingAlbum,
+      album,
     } = this.props;
-    loadingAlbum(`/albums/${id}`, ALBUM);
+    if (!album?.id || album.id !== id) {
+      loadingAlbum(`/albums/${id}`, ALBUM);
+    }
   }
 
   render() {
@@ -32,7 +34,7 @@ class Artist extends React.Component {
             {album?.id ? `Альбом - ${album.name}` : 'Альбом не найден'}
           </title>
         </Helmet>
-        <ContentWrapper>
+        <>
           {isLoading ? (
             <Loader />
           ) : (
@@ -52,7 +54,7 @@ class Artist extends React.Component {
               )}
             </>
           )}
-        </ContentWrapper>
+        </>
       </>
     );
   }

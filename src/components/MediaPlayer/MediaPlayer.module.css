@@ -64,6 +64,32 @@
   transition: all 0.2s linear;
 }
 
+.controllerRepeat {
+  display: flex;
+  gap: 2rem;
+}
+
+.repeatSvg {
+  width: 2rem;
+  height: 2rem;
+
+  cursor: pointer;
+
+  opacity: 0.7;
+}
+
+.repeatSvg:hover {
+  opacity: 1;
+}
+
+.repeatActive {
+  fill: var( --green );
+}
+
+.repearDisabled {
+  fill: var( --white );
+}
+
 .rewindPrev {
   width: 2rem;
   height: 2rem;
@@ -103,7 +129,7 @@
 .progressBarResult::before {
   position: absolute;
   top: -0.5rem;
-  right: 0;
+  right: -0.5rem;
 
   width: 1.5rem;
   height: 1.5rem;
@@ -120,6 +146,10 @@
 
 .progressBar:hover .progressBarResult::before {
   opacity: 1;
+}
+
+.progressBar:hover .progressBarResult {
+  background-color: var( --green );
 }
 
 .time {

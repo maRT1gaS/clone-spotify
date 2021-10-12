@@ -1,15 +1,36 @@
 @import '../../styles/variables.css';
 
 .navWrapper {
+  position: relative;
+  grid-area: 'verticalNav';
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
-  width: 35rem;
+  width: 30rem;
   min-height: 100%;
   padding: 2rem 1rem 2rem 0.5rem;
 
   background-color: var( --black );
+}
+
+.skipNav {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  overflow: hidden;
+
+  height: 0;
+
+  outline: none;
+
+  font-size: 2rem;
+}
+
+.visible {
+  height: auto;
 }
 
 .navContent {
@@ -28,7 +49,6 @@
 .logOut {
   display: flex;
   align-items: center;
-
   justify-content: center;
 
   width: max-content;
@@ -36,6 +56,7 @@
   cursor: pointer;
 
   color: var( --white-opacity );
+  border-radius: 1rem;
 
   font-size: 1.7rem;
   gap: 1rem;

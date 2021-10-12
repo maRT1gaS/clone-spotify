@@ -3,33 +3,30 @@ import { Helmet } from 'react-helmet-async';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-  ContentWrapper,
   CardsList,
   MusicList,
   Loader,
   ContentNotification,
 } from '../../components/index';
 import { loadingAction } from '../../redux/actions/loadingAction';
-import { ALL } from '../../redux/actionTypes';
+import { SEARCH } from '../../redux/actionTypes';
 
 const Search = ({
-  search,
+  searchData: { songs, artists, albums },
+  searchValue,
   isLoading,
   loadingSearchData,
-  songs,
-  artists,
-  albums,
 }) => {
   useEffect(() => {
-    loadingSearchData(`/search?query=${search}`, ALL);
-  }, [loadingSearchData, search]);
+    loadingSearchData(`/search?query=${searchValue}`, SEARCH);
+  }, [loadingSearchData, searchValue]);
 
   return (
     <>
       <Helmet>
         <title>Поиск</title>
       </Helmet>
-      <ContentWrapper>
+      <>
         {isLoading ? (
           <Loader />
         ) : (
@@ -48,25 +45,25 @@ const Search = ({
               )}
           </>
         )}
-      </ContentWrapper>
+      </>
     </>
   );
 };
 
 Search.propTypes = {
-  search: PropTypes.string.isRequired,
+  searchValue: PropTypes.string.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  songs: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  albums: PropTypes.arrayOf(PropTypes.object).isRequired,
-  artists: PropTypes.arrayOf(PropTypes.object).isRequired,
+  searchData: PropTypes.shape({
+    songs: PropTypes.arrayOf(PropTypes.shape()),
+    albums: PropTypes.arrayOf(PropTypes.shape()),
+    artists: PropTypes.arrayOf(PropTypes.shape()),
+  }).isRequired,
   loadingSearchData: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   isLoading: state.loadingData.isLoading,
-  songs: state.loadingData.songs,
-  artists: state.loadingData.artists,
-  albums: state.loadingData.albums,
+  searchData: state.loadingData.search,
 });
 
 const mapDispatchToProps = (dispatch) => ({

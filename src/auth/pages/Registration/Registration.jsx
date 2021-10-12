@@ -51,18 +51,21 @@ const Registration = ({ isAuth, onRegistartion, typeNotification }) => {
   };
 
   useEffect(() => {
+    if (typeNotification === 'success') {
+      setPasswordInp('');
+      setEmailInp('');
+      setCopyPasswordInp('');
+      setNameInp('');
+      history.push('/login');
+    }
+  }, [history, typeNotification]);
+
+  useEffect(() => {
     if (!isAuth) {
       const firstInput = document.getElementById('name');
       firstInput.focus();
-      if (typeNotification === 'success') {
-        setPasswordInp('');
-        setEmailInp('');
-        setCopyPasswordInp('');
-        setNameInp('');
-        history.push('/login');
-      }
     }
-  }, [history, isAuth, typeNotification]);
+  }, [isAuth]);
 
   if (isAuth) {
     return <Redirect push to='/' />;

@@ -45,6 +45,19 @@ export const errorSongNotFound = () => ({
   },
 });
 
+export const emptyInput = () => ({
+  type: ERROR,
+  payload: {
+    textNotification: 'Все поля обязательны!',
+  },
+});
+
+export const errorPasswordLength = () => ({
+  type: ERROR,
+  payload: {
+    textNotification: 'Длина пароля должна быть больше 8',
+  },
+});
 // SUCCESS NOTIFICATIONS
 //---------------------------------------------------------------------------------------
 

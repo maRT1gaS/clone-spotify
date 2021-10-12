@@ -3,13 +3,11 @@ import {
   START_LOADING,
   SUCCESS_LOADING,
   ERROR_LOADING,
-  SONGS,
-  ALL,
-  ALBUMS,
-  ARTISTS,
   ALBUM,
   ARTIST,
   LIBRARY,
+  HOME,
+  SEARCH,
 } from '../actionTypes';
 
 const startLoading = () => ({
@@ -31,17 +29,8 @@ const errorLoading = (textError) => ({
   },
 });
 
-const typeLoading = (type, dispatch, res) => {
+export const typeLoading = (type, dispatch, res) => {
   switch (type) {
-    case SONGS:
-      dispatch(successLoading(res.data, type));
-      break;
-    case ARTISTS:
-      dispatch(successLoading(res.data, type));
-      break;
-    case ALBUMS:
-      dispatch(successLoading(res.data, type));
-      break;
     case ALBUM:
       dispatch(successLoading(res.data, type));
       break;
@@ -49,10 +38,12 @@ const typeLoading = (type, dispatch, res) => {
       dispatch(successLoading(res.data, type));
       break;
     case LIBRARY:
+      dispatch(successLoading(res.data.library, type));
+      break;
+    case HOME:
       dispatch(successLoading(res.data, type));
       break;
-    // ALL - SONGS, ALBUMS, ARTISTS
-    case ALL:
+    case SEARCH:
       dispatch(successLoading(res.data, type));
       break;
     default:
@@ -60,14 +51,18 @@ const typeLoading = (type, dispatch, res) => {
   }
 };
 
-export const loadingAction = (url, type) => (dispatch) => {
-  dispatch(startLoading());
-  axios
-    .get(`/api${url}`)
-    .then((res) => {
-      typeLoading(type, dispatch, res);
-    })
-    .catch(() => {
-      dispatch(errorLoading('Ошибка!'));
-    });
-};
+export const loadingAction =
+  (url, type, loader = true) =>
+  (dispatch) => {
+    if (loader) {
+      dispatch(startLoading());
+    }
+    axios
+      .get(`/api${url}`)
+      .then((res) => {
+        typeLoading(type, dispatch, res);
+      })
+      .catch(() => {
+        dispatch(errorLoading('Ошибка!'));
+      });
+  };

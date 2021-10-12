@@ -2,13 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {
-  ContentWrapper,
-  CardsList,
-  MusicList,
-  Profile,
-  Loader,
-} from '../../components/index';
+import { CardsList, MusicList, Profile, Loader } from '../../components/index';
 import { loadingAction } from '../../redux/actions/loadingAction';
 import { ARTIST } from '../../redux/actionTypes';
 
@@ -19,8 +13,11 @@ class Artist extends React.Component {
         params: { id },
       },
       loadingArtist,
+      artist,
     } = this.props;
-    loadingArtist(`/artists/${id}`, ARTIST);
+    if (!artist?.id || artist.id !== id) {
+      loadingArtist(`/artists/${id}`, ARTIST);
+    }
   }
 
   render() {
@@ -32,7 +29,7 @@ class Artist extends React.Component {
             {artist?.id ? `Артист - ${artist.name}` : 'Артист не найден'}
           </title>
         </Helmet>
-        <ContentWrapper>
+        <>
           {isLoading ? (
             <Loader />
           ) : (
@@ -56,7 +53,7 @@ class Artist extends React.Component {
               )}
             </>
           )}
-        </ContentWrapper>
+        </>
       </>
     );
   }

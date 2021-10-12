@@ -1,4 +1,4 @@
-import { SUCCESS_AUTH, START_AUTH, LOG_OUT } from '../actionTypes';
+import { SUCCESS_AUTH, START_AUTH } from '../actionTypes';
 
 const initionState = {
   isAuth: false,
@@ -20,13 +20,6 @@ export const authorization = (state = initionState, action) => {
         isAuth: true,
         name: action.payload.name,
         email: action.payload.email,
-      };
-    case LOG_OUT:
-      return {
-        ...state,
-        isAuth: false,
-        name: '',
-        email: '',
       };
     default:
       return state;

@@ -4,6 +4,7 @@
   position: relative;
 
   color: var( --white-opacity );
+  outline: none;
 
   font-size: 1.3rem;
 }

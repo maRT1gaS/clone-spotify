@@ -53,12 +53,12 @@
   caret-color: var( --green );
 }
 
-.paddingRight {
-  padding-right: 3rem;
+.input:focus {
+  border: 0.2rem solid var( --green );
 }
 
-.onTab {
-  border: 0.2rem solid var( --green );
+.paddingRight {
+  padding-right: 3rem;
 }
 
 .input::placeholder {

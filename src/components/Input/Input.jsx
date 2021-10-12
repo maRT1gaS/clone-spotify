@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styles from './Input.module.css';
-import ClearIcon from '../../assets/svg/delete.svg';
 
 export const Input = ({
   type,
@@ -13,11 +12,15 @@ export const Input = ({
   clearIcon,
   value,
   onChange,
-  handleClear,
+  onClick,
   autoComplete,
+  secondIcon,
+  onMouseDown,
+  onMouseUp,
+  onMouseLeave,
 }) => {
   const inputRef = useRef();
-  const [onTab, setOnTab] = useState(false);
+  const [isFocus, setIsFocus] = useState(false);
 
   const focusOnInput = () => {
     inputRef.current.focus();
@@ -25,7 +28,7 @@ export const Input = ({
 
   const setOutline = (key) => {
     if (key.code === 'Tab') {
-      setOnTab(true);
+      setIsFocus(true);
     }
   };
 
@@ -54,21 +57,23 @@ export const Input = ({
         ref={inputRef}
         placeholder={placeholder}
         className={cn(styles.input, {
-          [styles.onTab]: onTab,
+          isFocus,
           [styles.paddingRight]: clearIcon,
         })}
-        onBlur={() => setOnTab(false)}
+        onBlur={() => setIsFocus(false)}
         onKeyUp={setOutline}
       />
 
-      {clearIcon && Boolean(value.length) && (
+      {secondIcon && (
         <div
           role='presentation'
-          atia-label='Кнопка очистки поля'
-          className={`${styles.inputIcon} ${styles.clearIcon}`}
-          onClick={handleClear}
+          className={`${styles.inputIcon} ${styles.clearIcon} no-copy`}
+          onClick={onClick}
+          onMouseDown={onMouseDown}
+          onMouseUp={onMouseUp}
+          onMouseLeave={onMouseLeave}
         >
-          <ClearIcon />
+          {secondIcon}
         </div>
       )}
     </div>
@@ -84,16 +89,24 @@ Input.propTypes = {
   label: PropTypes.string.isRequired,
   value: PropTypes.string,
   onChange: PropTypes.func,
-  handleClear: PropTypes.func,
+  onClick: PropTypes.func,
   autoComplete: PropTypes.oneOf(['on', 'off']),
+  secondIcon: PropTypes.element,
+  onMouseDown: PropTypes.func,
+  onMouseUp: PropTypes.func,
+  onMouseLeave: PropTypes.func,
 };
 
 Input.defaultProps = {
   type: 'text',
   preIcon: null,
   clearIcon: false,
-  handleClear: null,
+  onClick: null,
   autoComplete: 'on',
   value: null,
   onChange: null,
+  secondIcon: null,
+  onMouseDown: null,
+  onMouseUp: null,
+  onMouseLeave: null,
 };

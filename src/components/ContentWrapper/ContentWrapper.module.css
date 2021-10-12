@@ -10,6 +10,8 @@
   /*  8rem - MediaPlayer 5.5rem - ContentHeader */
   height: calc( 100vh - 8rem - 5.5rem );
   padding: 1rem 2rem;
+
+  outline: none;
 }
 
 .contentWrapper::-webkit-scrollbar {

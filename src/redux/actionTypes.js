@@ -15,14 +15,13 @@ export const ERROR_LOADING = 'ERROR_LOADING';
 
 export const ARTIST = 'ARTIST';
 export const ALBUM = 'ALBUM';
-export const SONGS = 'SONGS';
 export const ARTISTS = 'ARTISTS';
 export const ALBUMS = 'ALBUMS';
 export const LIBRARY = 'LIBRARY';
-// ALL - SONGS, ALBUMS, ARTISTS
-export const ALL = 'ALL';
+export const HOME = 'HOME';
+export const SEARCH = 'SEARCH';
 
 export const START_SONG = 'START_SONG';
 export const CONTROL_SONG = 'CONTROL_SONG';
 export const UPDATE_VOLUME = 'UPDATE_VOLUME';
-export const PLAYING_PLAYLIST_OPEN = 'PLAYING_PLAYLIST_OPEN';
+export const REPEAT_TOGGLE = 'REPEAT_TOGGLE';

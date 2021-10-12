@@ -3,8 +3,8 @@ import { SUCCESS_AUTH, START_AUTH, LOG_OUT } from '../actionTypes';
 import {
   errorPassEmailAction,
   errorNetworkAction,
-  resetNotification,
   successAuth,
+  emptyInput,
 } from './notificationAction';
 
 const startAuthAction = () => ({
@@ -25,8 +25,12 @@ export const logOutAction = () => ({
 });
 
 export const authorisationAction = (authData) => (dispatch) => {
+  const { email, password } = authData;
+  if (email.length === 0 || password.length === 0) {
+    dispatch(emptyInput());
+    return;
+  }
   dispatch(startAuthAction());
-  dispatch(resetNotification());
   axios
     .post('/api/auth/signin', {
       ...authData,

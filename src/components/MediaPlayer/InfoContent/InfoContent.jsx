@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
 import styles from './InfoContent.module.css';
 import HeartIcon from '../../../assets/svg/heart.svg';
 import { SongLink } from '../../index';
+import { loadingAction } from '../../../redux/actions/loadingAction';
+import { LIBRARY } from '../../../redux/actionTypes';
 
 const InfoContent = ({ currentSong }) => {
   const [isLike, setIsLike] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (currentSong?.id) {
@@ -26,6 +30,8 @@ const InfoContent = ({ currentSong }) => {
         method,
         url: '/api/library',
         data: { id: idSong },
+      }).then(() => {
+        dispatch(loadingAction('/library', LIBRARY, false));
       });
     };
     if (isLike) {

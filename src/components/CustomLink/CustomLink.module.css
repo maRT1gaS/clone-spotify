@@ -2,6 +2,9 @@
 
 .link {
   position: relative;
+
+  border-radius: 1rem;
+  outline: none;
 }
 
 .small {

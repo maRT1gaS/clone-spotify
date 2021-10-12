@@ -1,3 +1,7 @@
+.link {
+  outline: none;
+}
+
 .container {
   width: 18rem;
   height: 22rem;
@@ -24,6 +28,7 @@
   width: 12rem;
   height: 12rem;
   object-fit: cover;
+  object-position: center;
 }
 
 .artistBr {
