@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './InfoContent.module.css';
 import HeartIcon from '../../../assets/svg/heart.svg';
 import { SongLink } from '../../index';
@@ -11,18 +11,20 @@ import { LIBRARY } from '../../../redux/actionTypes';
 const InfoContent = ({ currentSong }) => {
   const [isLike, setIsLike] = useState(false);
   const dispatch = useDispatch();
+  const librarySongs = useSelector((state) => state.loadingData.library);
 
   useEffect(() => {
     if (currentSong?.id) {
-      axios.get('/api/library').then((res) => {
-        const librarySongs = res.data.library;
-        const songLike = librarySongs.some(
-          (song) => song.id === currentSong.id
-        );
-        setIsLike(songLike);
-      });
+      const songLike = librarySongs.some((song) => song.id === currentSong.id);
+      setIsLike(songLike);
     }
-  }, [currentSong.id, setIsLike]);
+  }, [currentSong.id, librarySongs, setIsLike]);
+
+  useEffect(() => {
+    if (librarySongs.length === 0) {
+      dispatch(loadingAction('/library', LIBRARY));
+    }
+  }, [dispatch, librarySongs.length]);
 
   const toogleLibrarySongStatus = () => {
     const axiosRes = async (method, idSong) => {
