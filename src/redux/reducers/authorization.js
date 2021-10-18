@@ -4,6 +4,7 @@ const initionState = {
   isAuth: false,
   name: '',
   email: '',
+  role: '',
 };
 
 export const authorization = (state = initionState, action) => {
@@ -13,6 +14,7 @@ export const authorization = (state = initionState, action) => {
         isAuth: false,
         name: '',
         email: '',
+        role: '',
       };
     case SUCCESS_AUTH:
       return {
@@ -20,6 +22,7 @@ export const authorization = (state = initionState, action) => {
         isAuth: true,
         name: action.payload.name,
         email: action.payload.email,
+        role: action.payload.role,
       };
     default:
       return state;

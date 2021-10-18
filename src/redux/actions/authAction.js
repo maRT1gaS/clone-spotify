@@ -1,4 +1,6 @@
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
+import Cookie from 'js-cookie';
 import { SUCCESS_AUTH, START_AUTH, LOG_OUT } from '../actionTypes';
 import {
   errorPassEmailAction,
@@ -11,14 +13,23 @@ const startAuthAction = () => ({
   type: START_AUTH,
 });
 
-export const successAuthAction = (data) => ({
-  type: SUCCESS_AUTH,
-  payload: {
-    isAuth: true,
-    name: data.name,
-    email: data.email,
-  },
-});
+export const successAuthAction = () => {
+  const token = Cookie.get('TOKEN');
+  if (token) {
+    const decoded = jwtDecode(token);
+    const { role, name, email } = decoded;
+    return {
+      type: SUCCESS_AUTH,
+      payload: {
+        isAuth: true,
+        role,
+        name,
+        email,
+      },
+    };
+  }
+  return false;
+};
 
 export const logOutAction = () => ({
   type: LOG_OUT,
@@ -40,11 +51,6 @@ export const authorisationAction = (authData) => (dispatch) => {
         dispatch(errorPassEmailAction());
       } else {
         dispatch(successAuth());
-        const userData = {
-          name: res.data.name,
-          email: res.data.email,
-        };
-        sessionStorage.setItem('userData', JSON.stringify(userData));
         dispatch(successAuthAction(res.data));
       }
     })

@@ -20,20 +20,18 @@ const App = ({
   playingSong,
 }) => {
   const [loading, setLoading] = useState(true);
-
-  if (notification) {
-    setTimeout(() => {
-      resetAlert();
-    }, 2500);
-  }
+  useEffect(() => {
+    if (notification) {
+      setTimeout(() => {
+        resetAlert();
+      }, 2500);
+    }
+  }, [notification, resetAlert]);
 
   useEffect(() => {
     const token = Cookie.get('TOKEN');
     if (token) {
-      const userData = JSON.parse(sessionStorage.getItem('userData'));
-      if (userData) {
-        setUserData(userData);
-      }
+      setUserData();
       const settings = JSON.parse(localStorage.getItem('settings'));
       if (settings) {
         changeVolume(settings.volume);
@@ -87,7 +85,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setUserData: (data) => dispatch(successAuthAction(data)),
+  setUserData: () => dispatch(successAuthAction()),
   resetAlert: () => dispatch(resetNotification()),
   changeVolume: (value) => dispatch(updateVolume(value)),
   playingSong: (currentSong, playingPlaylist, event) =>

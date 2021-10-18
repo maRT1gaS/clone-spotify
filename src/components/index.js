@@ -20,3 +20,5 @@ export * from './SongLink/SongLink';
 export * from './Profile/Propfile';
 export * from './ContentError/ContentError';
 export * from './PlayingSongsList/PlayingSongsList';
+export * from './HeaderUserModal/HeaderUserModal';
+export * from './ModalPortal/ModalPortal';

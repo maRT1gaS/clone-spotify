@@ -3,6 +3,7 @@ import { authorization } from './authorization';
 import { notification } from './notification';
 import { loadingData } from './loadingData';
 import { playingSong } from './playingSong';
+import { uiState } from './uiState';
 import { LOG_OUT } from '../actionTypes';
 
 const rootReducer = combineReducers({
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
   notification,
   loadingData,
   playingSong,
+  uiState,
 });
 
 export default (state, action) =>

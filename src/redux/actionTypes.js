@@ -25,3 +25,6 @@ export const START_SONG = 'START_SONG';
 export const CONTROL_SONG = 'CONTROL_SONG';
 export const UPDATE_VOLUME = 'UPDATE_VOLUME';
 export const REPEAT_TOGGLE = 'REPEAT_TOGGLE';
+
+export const OPEN_MODAL = 'OPEN_MODAL';
+export const CLOSE_MODAL = 'CLOSE_MODAL';

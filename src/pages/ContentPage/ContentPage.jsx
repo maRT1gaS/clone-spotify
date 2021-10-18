@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
 import {
   VerticalNav,
   ContentHeader,
@@ -10,14 +11,25 @@ import {
   Form,
   ContentError,
   ContentWrapper,
+  HeaderUserModal,
+  ModalPortal,
 } from '../../components/index';
 import styles from './ContentPage.module.css';
 import SearchIcon from '../../assets/svg/loupe.svg';
 import MediaPlayer from '../../components/MediaPlayer/MediaPlayer';
 import ClearIcon from '../../assets/svg/delete.svg';
 import ContentPageRouting from '../../router/ContentPageRouting';
+import { closeModal } from '../../redux/actions/uiStateAction';
 
-const ContentPage = ({ name, isError, textError }) => {
+const ContentPage = ({
+  name,
+  isError,
+  textError,
+  role,
+  isOpen,
+  typeModal,
+  closeModalWindow,
+}) => {
   const [value, setValue] = useState('');
   const [visible, setVisible] = useState(false);
   const [isFocus, setIsFocus] = useState(false);
@@ -48,7 +60,13 @@ const ContentPage = ({ name, isError, textError }) => {
   const handleClear = () => setValue('');
 
   return (
-    <div className={`${styles.wrapperContent} fullscreen`}>
+    <div
+      onClick={() => {
+        if (isOpen) closeModalWindow();
+      }}
+      role='presentation'
+      className={`${styles.wrapperContent} fullscreen`}
+    >
       <VerticalNav
         onKeyDown={(key) => skipNav(key)}
         setVisible={setVisible}
@@ -75,7 +93,12 @@ const ContentPage = ({ name, isError, textError }) => {
               </Form>
             )}
           </div>
-          <HeaderUser name={name} />
+          <HeaderUser role={role} name={name} />
+          {isOpen && typeModal === 'headerUser' && (
+            <ModalPortal>
+              <HeaderUserModal title='Админка' href='http://localhost:8000/' />
+            </ModalPortal>
+          )}
         </ContentHeader>
         <ContentWrapper
           onBlur={() => setIsFocus(false)}
@@ -95,12 +118,23 @@ ContentPage.propTypes = {
   name: PropTypes.string.isRequired,
   isError: PropTypes.bool.isRequired,
   textError: PropTypes.string.isRequired,
+  role: PropTypes.string.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  typeModal: PropTypes.string.isRequired,
+  closeModalWindow: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   name: state.authorization.name,
   isError: state.loadingData.isError,
   textError: state.loadingData.textError,
+  role: state.authorization.role,
+  isOpen: state.uiState.isOpen,
+  typeModal: state.uiState.typeModal,
 });
 
-export default connect(mapStateToProps)(ContentPage);
+const mapDispatchToProps = (dispatch) => ({
+  closeModalWindow: () => dispatch(closeModal()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContentPage);
