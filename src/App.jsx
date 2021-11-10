@@ -31,7 +31,7 @@ const App = ({
   useEffect(() => {
     const token = Cookie.get('TOKEN');
     if (token) {
-      setUserData();
+      setUserData(token);
       const settings = JSON.parse(localStorage.getItem('settings'));
       if (settings) {
         changeVolume(settings.volume);
@@ -85,7 +85,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setUserData: () => dispatch(successAuthAction()),
+  setUserData: (token) => dispatch(successAuthAction(token)),
   resetAlert: () => dispatch(resetNotification()),
   changeVolume: (value) => dispatch(updateVolume(value)),
   playingSong: (currentSong, playingPlaylist, event) =>

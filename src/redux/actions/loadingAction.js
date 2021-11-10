@@ -10,11 +10,11 @@ import {
   SEARCH,
 } from '../actionTypes';
 
-const startLoading = () => ({
+export const startLoading = () => ({
   type: START_LOADING,
 });
 
-const successLoading = (data, type) => ({
+export const successLoading = (data, type) => ({
   type: SUCCESS_LOADING,
   payload: {
     data,
@@ -22,7 +22,7 @@ const successLoading = (data, type) => ({
   },
 });
 
-const errorLoading = (textError) => ({
+export const errorLoading = (textError) => ({
   type: ERROR_LOADING,
   payload: {
     textError,
@@ -57,12 +57,13 @@ export const loadingAction =
     if (loader) {
       dispatch(startLoading());
     }
-    axios
+    return axios
       .get(`/api${url}`)
       .then((res) => {
         typeLoading(type, dispatch, res);
       })
-      .catch(() => {
+      .catch((error) => {
         dispatch(errorLoading('Ошибка!'));
+        return error;
       });
   };

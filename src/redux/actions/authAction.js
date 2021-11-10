@@ -1,27 +1,19 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
-import Cookie from 'js-cookie';
 import { SUCCESS_AUTH, START_AUTH, LOG_OUT } from '../actionTypes';
-import {
-  errorPassEmailAction,
-  errorNetworkAction,
-  successAuth,
-  emptyInput,
-} from './notificationAction';
+import { errorNotification, successNotification } from './notificationAction';
 
-const startAuthAction = () => ({
+export const startAuthAction = () => ({
   type: START_AUTH,
 });
 
-export const successAuthAction = () => {
-  const token = Cookie.get('TOKEN');
+export const successAuthAction = (token) => {
   if (token) {
     const decoded = jwtDecode(token);
     const { role, name, email } = decoded;
     return {
       type: SUCCESS_AUTH,
       payload: {
-        isAuth: true,
         role,
         name,
         email,
@@ -38,7 +30,7 @@ export const logOutAction = () => ({
 export const authorisationAction = (authData) => (dispatch) => {
   const { email, password } = authData;
   if (email.length === 0 || password.length === 0) {
-    dispatch(emptyInput());
+    dispatch(errorNotification('Все поля обязательны!'));
     return;
   }
   dispatch(startAuthAction());
@@ -48,13 +40,13 @@ export const authorisationAction = (authData) => (dispatch) => {
     })
     .then((res) => {
       if (res.data.error) {
-        dispatch(errorPassEmailAction());
+        dispatch(errorNotification('Не правильный пароль/email.'));
       } else {
-        dispatch(successAuth());
+        dispatch(successNotification('Вы успешно вошли.'));
         dispatch(successAuthAction(res.data));
       }
     })
     .catch(() => {
-      dispatch(errorNetworkAction());
+      dispatch(errorNotification('Ошибка!'));
     });
 };

@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import InfoContent from './InfoContent/InfoContent';
 import SoundControl from './SoundControl/SoundControl';
 
-import { errorSongNotFound } from '../../redux/actions/notificationAction';
+import { errorNotification } from '../../redux/actions/notificationAction';
 import {
   controlSong,
   startSong,
@@ -336,7 +336,7 @@ const mapDispatchToProps = (dispatch) => ({
   changeSongStatus: () => dispatch(controlSong()),
   playingSong: (currentSong, playingPlaylist, event) =>
     dispatch(startSong(currentSong, playingPlaylist, event)),
-  songNotFound: () => dispatch(errorSongNotFound()),
+  songNotFound: () => dispatch(errorNotification('Данная песня не доступна.')),
   toggleRepeatSong: () => dispatch(toggleRepeat()),
 });
 

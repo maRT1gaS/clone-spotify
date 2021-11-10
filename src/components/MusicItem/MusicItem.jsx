@@ -28,8 +28,8 @@ export const MusicItem = ({ song, playingPlaylist }) => {
   };
 
   const onSong = (key) => {
-    key.preventDefault();
     if (key.code === 'Enter' || key.code === 'Space') {
+      key.preventDefault();
       playSong(song, playingPlaylist);
     }
   };

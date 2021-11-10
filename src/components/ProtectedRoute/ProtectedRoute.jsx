@@ -2,14 +2,14 @@ import React, { useEffect } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { errorNotAuth } from '../../redux/actions/notificationAction';
+import { errorNotification } from '../../redux/actions/notificationAction';
 
 export const ProtectedRoute = ({ isAuth, path, component, children }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (!isAuth) {
-      dispatch(errorNotAuth());
+      dispatch(errorNotification('Для просмотра контента авторизуйтесь.'));
     }
   }, [dispatch, isAuth]);
 

@@ -1,12 +1,5 @@
 import axios from 'axios';
-import {
-  errorEmailExist,
-  errorNetworkAction,
-  errorPasswordDoesNotMatch,
-  successRegistration,
-  errorPasswordLength,
-  emptyInput,
-} from './notificationAction';
+import { errorNotification, successNotification } from './notificationAction';
 
 export const registrationAction = (userData) => (dispatch) => {
   const { name, email, password, copypassword } = userData;
@@ -16,15 +9,15 @@ export const registrationAction = (userData) => (dispatch) => {
     password.length === 0 ||
     copypassword.length === 0
   ) {
-    dispatch(emptyInput());
+    dispatch(errorNotification('Все поля обязательны!'));
     return;
   }
   if (password.length < 8) {
-    dispatch(errorPasswordLength());
+    dispatch(errorNotification('Длина пароля должна быть больше 8'));
     return;
   }
   if (password !== copypassword) {
-    dispatch(errorPasswordDoesNotMatch());
+    dispatch(errorNotification('Пароли не совпадают.'));
     return;
   }
   axios
@@ -33,12 +26,12 @@ export const registrationAction = (userData) => (dispatch) => {
     })
     .then((res) => {
       if (res.data.error) {
-        dispatch(errorEmailExist());
+        dispatch(errorNotification('Электронная почта уже существует.'));
       } else {
-        dispatch(successRegistration());
+        dispatch(successNotification('Вы успешно зарегестрировались.'));
       }
     })
     .catch(() => {
-      dispatch(errorNetworkAction());
+      dispatch(errorNotification('Ошибка!'));
     });
 };

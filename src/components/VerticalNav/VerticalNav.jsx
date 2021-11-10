@@ -10,7 +10,7 @@ import styles from './VerticalNav.module.css';
 import { navItems } from '../../helpers/navItems';
 import LogOutIcon from '../../assets/svg/log-out.svg';
 import { logOutAction } from '../../redux/actions/authAction';
-import { successExit } from '../../redux/actions/notificationAction';
+import { successNotification } from '../../redux/actions/notificationAction';
 
 export const VerticalNav = ({ onKeyDown, setVisible, visible }) => {
   const [isFocus, setIsFocus] = useState(false);
@@ -30,7 +30,7 @@ export const VerticalNav = ({ onKeyDown, setVisible, visible }) => {
     sessionStorage.removeItem('userData');
     sessionStorage.removeItem('lastPlayingSong');
     dispatch(logOutAction());
-    dispatch(successExit());
+    dispatch(successNotification('Вы успешно вышли.'));
     history.push('/login');
   };
 
