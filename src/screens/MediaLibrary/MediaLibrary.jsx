@@ -46,8 +46,8 @@ const mapStateToProps = (state) => ({
   idUser: state.authorization.id,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  loadingSongs: (url, type) => dispatch(loadingAction(url, type)),
-});
+const mapDispatchToProps = {
+  loadingSongs: (url, type) => loadingAction(url, type),
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(MediaLibrary);

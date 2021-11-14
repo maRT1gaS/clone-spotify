@@ -117,9 +117,9 @@ Login.propTypes = {
   typeNotification: PropTypes.string.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onAuthorisation: (authData) => dispatch(authorisationAction(authData)),
-});
+const mapDispatchToProps = {
+  onAuthorisation: (authData) => authorisationAction(authData),
+};
 
 const mapStateToProps = (state) => ({
   isAuth: state.authorization.isAuth,

@@ -1,4 +1,5 @@
 import Cookie from 'js-cookie';
+import jwtDecode from 'jwt-decode';
 
 import {
   startAuthAction,
@@ -25,15 +26,12 @@ describe('Testing action auth', () => {
 
   it('actionCreater - successAuth with token', () => {
     const token = Cookie.get();
-    const auth = successAuthAction(token);
+    const decodeData = jwtDecode(token);
+
+    const auth = successAuthAction(decodeData);
     expect(auth).toEqual({
       type: SUCCESS_AUTH,
       payload: { role: 'admin', name: 'Dima', email: 'ddddd@hhh.ruu' },
     });
-  });
-
-  it('actionCreater - successAuth without token', () => {
-    const auth = successAuthAction('');
-    expect(auth).toBeFalsy();
   });
 });

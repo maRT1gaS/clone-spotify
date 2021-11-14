@@ -72,8 +72,8 @@ const mapStateToProps = (state) => ({
   album: state.loadingData.album,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  loadingAlbum: (url, type) => dispatch(loadingAction(url, type)),
-});
+const mapDispatchToProps = {
+  loadingAlbum: (url, type) => loadingAction(url, type),
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Artist);

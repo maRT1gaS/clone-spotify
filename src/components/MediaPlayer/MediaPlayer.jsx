@@ -332,12 +332,12 @@ const mapStateToProps = (state) => ({
   event: state.playingSong.event,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  changeSongStatus: () => dispatch(controlSong()),
+const mapDispatchToProps = {
+  changeSongStatus: () => controlSong(),
   playingSong: (currentSong, playingPlaylist, event) =>
-    dispatch(startSong(currentSong, playingPlaylist, event)),
-  songNotFound: () => dispatch(errorNotification('Данная песня не доступна.')),
-  toggleRepeatSong: () => dispatch(toggleRepeat()),
-});
+    startSong(currentSong, playingPlaylist, event),
+  songNotFound: () => errorNotification('Данная песня не доступна.'),
+  toggleRepeatSong: () => toggleRepeat(),
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(MediaPlayer);

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Cookie from 'js-cookie';
 import { Helmet } from 'react-helmet-async';
+import jwtDecode from 'jwt-decode';
 import styles from './App.module.css';
 import { LoaderPage, Notification } from './components/index';
 import { successAuthAction } from './redux/actions/authAction';
@@ -31,7 +32,8 @@ const App = ({
   useEffect(() => {
     const token = Cookie.get('TOKEN');
     if (token) {
-      setUserData(token);
+      const decodedData = jwtDecode(token);
+      setUserData(decodedData);
       const settings = JSON.parse(localStorage.getItem('settings'));
       if (settings) {
         changeVolume(settings.volume);
@@ -84,12 +86,12 @@ const mapStateToProps = (state) => ({
   typeNotification: state.notification.typeNotification,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  setUserData: (token) => dispatch(successAuthAction(token)),
-  resetAlert: () => dispatch(resetNotification()),
-  changeVolume: (value) => dispatch(updateVolume(value)),
+const mapDispatchToProps = {
+  setUserData: (token) => successAuthAction(token),
+  resetAlert: () => resetNotification(),
+  changeVolume: (value) => updateVolume(value),
   playingSong: (currentSong, playingPlaylist, event) =>
-    dispatch(startSong(currentSong, playingPlaylist, event)),
-});
+    startSong(currentSong, playingPlaylist, event),
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

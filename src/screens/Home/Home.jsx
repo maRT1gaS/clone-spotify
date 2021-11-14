@@ -40,8 +40,8 @@ const mapStateToProps = (state) => ({
   songs: state.loadingData.home,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  loadingSongs: (url, type) => dispatch(loadingAction(url, type)),
-});
+const mapDispatchToProps = {
+  loadingSongs: (url, type) => loadingAction(url, type),
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -144,8 +144,8 @@ const mapStateToProps = (state) => ({
   typeNotification: state.notification.typeNotification,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onRegistartion: (userData) => dispatch(registrationAction(userData)),
-});
+const mapDispatchToProps = {
+  onRegistartion: (userData) => registrationAction(userData),
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Registration);

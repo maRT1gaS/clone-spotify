@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button should render correctly 1`] = `
+<button
+  className="button"
+  onBlur={[Function]}
+  onClick={null}
+  onKeyUp={[Function]}
+  type="button"
+>
+  Войти
+</button>
+`;

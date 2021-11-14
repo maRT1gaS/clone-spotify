@@ -133,8 +133,8 @@ const mapStateToProps = (state) => ({
   typeModal: state.uiState.typeModal,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  closeModalWindow: () => dispatch(closeModal()),
-});
+const mapDispatchToProps = {
+  closeModalWindow: () => closeModal(),
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContentPage);

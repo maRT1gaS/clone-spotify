@@ -1,5 +1,4 @@
 import axios from 'axios';
-import jwtDecode from 'jwt-decode';
 import { SUCCESS_AUTH, START_AUTH, LOG_OUT } from '../actionTypes';
 import { errorNotification, successNotification } from './notificationAction';
 
@@ -7,20 +6,16 @@ export const startAuthAction = () => ({
   type: START_AUTH,
 });
 
-export const successAuthAction = (token) => {
-  if (token) {
-    const decoded = jwtDecode(token);
-    const { role, name, email } = decoded;
-    return {
-      type: SUCCESS_AUTH,
-      payload: {
-        role,
-        name,
-        email,
-      },
-    };
-  }
-  return false;
+export const successAuthAction = (userData) => {
+  const { role, name, email } = userData;
+  return {
+    type: SUCCESS_AUTH,
+    payload: {
+      role,
+      name,
+      email,
+    },
+  };
 };
 
 export const logOutAction = () => ({

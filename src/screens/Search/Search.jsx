@@ -66,8 +66,8 @@ const mapStateToProps = (state) => ({
   searchData: state.loadingData.search,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  loadingSearchData: (url, type) => dispatch(loadingAction(url, type)),
-});
+const mapDispatchToProps = {
+  loadingSearchData: (url, type) => loadingAction(url, type),
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);
