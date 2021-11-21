@@ -1,25 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { MusicItem } from './MusicItem/MusicItem';
+import { MusicItem } from '../MusicItem/MusicItem';
 import { ContentTitle } from '../ContentTitle/ContentTitle';
 
-export const MusicList = ({ music, name }) => (
+export const MusicList = ({ songs, name }) => (
   <div>
     <ContentTitle name={name} />
-    {music.map((elem) => (
-      <MusicItem
-        key={elem.id}
-        time={elem.duration}
-        nameMusic={elem.name}
-        imageUrl={elem.album.imageUrl}
-        nameArtist={elem.artist.name}
-        nameAlbum={elem.album.name}
-      />
+    {songs.map((song) => (
+      <MusicItem key={song.id} song={song} playingPlaylist={songs} />
     ))}
   </div>
 );
 
 MusicList.propTypes = {
   name: PropTypes.string.isRequired,
-  music: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  songs: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

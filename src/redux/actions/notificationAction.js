@@ -1,62 +1,22 @@
-import { ERROR, RESET_NOTIFICATION, SUCCESS } from '../actionTypes';
+import {
+  ERROR_NOTIFICATION,
+  RESET_NOTIFICATION,
+  SUCCESS_NOTIFICATION,
+} from '../actionTypes';
 
-// ERROR NOTIFICATIONS
-//---------------------------------------------------------------------------------------
-
-export const errorPassEmailAction = () => ({
-  type: ERROR,
+export const errorNotification = (textNotification) => ({
+  type: ERROR_NOTIFICATION,
   payload: {
-    textNotification: 'Не правильный пароль/email.',
+    textNotification,
   },
 });
 
-export const errorNetworkAction = () => ({
-  type: ERROR,
+export const successNotification = (textNotification) => ({
+  type: SUCCESS_NOTIFICATION,
   payload: {
-    textNotification: 'Проверьте подключение к интернету.',
+    textNotification,
   },
 });
-
-export const errorEmailExist = () => ({
-  type: ERROR,
-  payload: {
-    textNotification: 'Электронная почта уже существует.',
-  },
-});
-
-export const errorPasswordDoesNotMatch = () => ({
-  type: ERROR,
-  payload: {
-    textNotification: 'Пароли не совпадают.',
-  },
-});
-
-export const errorNotAuth = () => ({
-  type: ERROR,
-  payload: {
-    textNotification: 'Для просмотра контента авторизуйтесь',
-  },
-});
-
-// SUCCESS NOTIFICATIONS
-//---------------------------------------------------------------------------------------
-
-export const successAuth = () => ({
-  type: SUCCESS,
-  payload: {
-    textNotification: 'Вы успешно вошли.',
-  },
-});
-
-export const successRegistration = () => ({
-  type: SUCCESS,
-  payload: {
-    textNotification: 'Вы успешно зарегестрировались',
-  },
-});
-
-// RESET NOTIFICATION
-//---------------------------------------------------------------------------------------
 
 export const resetNotification = () => ({
   type: RESET_NOTIFICATION,

@@ -1,17 +1,78 @@
 @import '../../styles/variables.css';
 
 .navWrapper {
-  width: 35rem;
+  position: relative;
+  grid-area: 'verticalNav';
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  width: 30rem;
   min-height: 100%;
-  padding: 2rem 1rem 0 0.5rem;
+  padding: 2rem 1rem 2rem 0.5rem;
 
   background-color: var( --black );
+}
+
+.skipNav {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  overflow: hidden;
+
+  height: 0;
+
+  outline: none;
+
+  font-size: 2rem;
+}
+
+.visible {
+  height: auto;
 }
 
 .navContent {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 5rem;
+}
 
-  height: 20rem;
+.logOutCon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logOut {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: max-content;
+
+  cursor: pointer;
+
+  color: var( --white-opacity );
+  border-radius: 1rem;
+
+  font-size: 1.7rem;
+  gap: 1rem;
+}
+
+.logOut svg {
+  fill: var( --white-opacity );
+
+  width: 2rem;
+  height: 2rem;
+}
+
+.logOut:hover {
+  color: var( --white );
+}
+
+.logOut:hover svg {
+  fill: var( --white );
 }

@@ -1,6 +1,10 @@
+.link {
+  outline: none;
+}
+
 .container {
-  min-width: 18rem;
-  max-width: 18rem;
+  width: 18rem;
+  height: 22rem;
   padding: 2rem 1rem;
 
   cursor: pointer;
@@ -24,6 +28,7 @@
   width: 12rem;
   height: 12rem;
   object-fit: cover;
+  object-position: center;
 }
 
 .artistBr {

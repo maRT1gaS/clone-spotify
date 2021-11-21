@@ -1,0 +1,78 @@
+@import '../../styles/variables.css';
+
+.songItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0.5rem 1.5rem;
+
+  border-radius: 1rem;
+
+  outline: none;
+}
+
+.songItem:hover {
+  border-radius: 1rem;
+  background-color: rgba( 255, 255, 255, 0.1 );
+}
+
+.songItemContent {
+  display: flex;
+  align-items: center;
+}
+
+.songItemSVG {
+  width: 2rem;
+  height: 2rem;
+}
+
+.selectedSong {
+  background-color: rgba( 255, 255, 255, 0.1 );
+}
+
+.selectedSongSvg {
+  fill: var( --green );
+}
+
+.hover {
+  fill: var( --white );
+}
+
+.unHover {
+  fill: var( --white-opacity );
+}
+
+.songItemImg {
+  width: 5rem;
+  height: 5rem;
+  margin-left: 1.5rem;
+  object-fit: cover;
+  object-position: center;
+}
+
+.songItemInfo {
+  margin-left: 1.5rem;
+}
+
+.songItemName {
+  color: rgba( 255, 255, 255, 0.9 );
+
+  font-size: 1.7rem;
+}
+
+.songItemSecondInfo {
+  margin-top: 0.5rem;
+}
+
+.songItemTime {
+  color: var( --white-opacity );
+
+  font-size: 1.7rem;
+}
+
+.songItem:hover .songItemSecondInfo,
+.songItem:hover .songItemTime,
+.songItem:hover .songItemName {
+  color: var( --white );
+}

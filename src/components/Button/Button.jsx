@@ -4,20 +4,20 @@ import cn from 'classnames';
 import styles from './Button.module.css';
 
 export const Button = ({ children, type, onClick }) => {
-  const [onTab, setOnTab] = useState(false);
+  const [isFocus, setIsFocus] = useState(false);
 
   const setOutline = (key) => {
     if (key.code === 'Tab') {
-      setOnTab(true);
+      setIsFocus(true);
     }
   };
   return (
     <button
       type={type === 'button' ? 'button' : 'submit'}
       className={cn(styles.button, {
-        [styles.onTab]: onTab,
+        [styles.isFocus]: isFocus,
       })}
-      onBlur={() => setOnTab(false)}
+      onBlur={() => setIsFocus(false)}
       onKeyUp={setOutline}
       onClick={onClick}
     >
@@ -28,7 +28,7 @@ export const Button = ({ children, type, onClick }) => {
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,
-  type: PropTypes.string,
+  type: PropTypes.oneOf(['submit', 'button']),
   onClick: PropTypes.func,
 };
 

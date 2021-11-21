@@ -2,22 +2,25 @@ import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import styles from './Input.module.css';
-import ClearIcon from '../../assets/svg/delete.svg';
 
 export const Input = ({
   type,
   placeholder,
   preIcon,
   id,
-  text,
+  label,
   clearIcon,
   value,
   onChange,
-  handleClear,
+  onClick,
   autoComplete,
+  secondIcon,
+  onMouseDown,
+  onMouseUp,
+  onMouseLeave,
 }) => {
   const inputRef = useRef();
-  const [onTab, setOnTab] = useState(false);
+  const [isFocus, setIsFocus] = useState(false);
 
   const focusOnInput = () => {
     inputRef.current.focus();
@@ -25,7 +28,7 @@ export const Input = ({
 
   const setOutline = (key) => {
     if (key.code === 'Tab') {
-      setOnTab(true);
+      setIsFocus(true);
     }
   };
 
@@ -42,7 +45,7 @@ export const Input = ({
       )}
 
       <label className='visually-hidden' htmlFor={id}>
-        {text}
+        {label}
       </label>
 
       <input
@@ -54,21 +57,23 @@ export const Input = ({
         ref={inputRef}
         placeholder={placeholder}
         className={cn(styles.input, {
-          [styles.onTab]: onTab,
+          isFocus,
           [styles.paddingRight]: clearIcon,
         })}
-        onBlur={() => setOnTab(false)}
+        onBlur={() => setIsFocus(false)}
         onKeyUp={setOutline}
       />
 
-      {clearIcon && Boolean(value.length) && (
+      {secondIcon && (
         <div
           role='presentation'
-          atia-label='Кнопка очистки поля'
-          className={`${styles.inputIcon} ${styles.clearIcon}`}
-          onClick={handleClear}
+          className={`${styles.inputIcon} ${styles.clearIcon} no-copy`}
+          onClick={onClick}
+          onMouseDown={onMouseDown}
+          onMouseUp={onMouseUp}
+          onMouseLeave={onMouseLeave}
         >
-          <ClearIcon />
+          {secondIcon}
         </div>
       )}
     </div>
@@ -76,23 +81,32 @@ export const Input = ({
 };
 
 Input.propTypes = {
-  type: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(['text', 'password', 'email', 'search']),
   placeholder: PropTypes.string.isRequired,
   preIcon: PropTypes.element,
   clearIcon: PropTypes.bool,
   id: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
   value: PropTypes.string,
   onChange: PropTypes.func,
-  handleClear: PropTypes.func,
-  autoComplete: PropTypes.string,
+  onClick: PropTypes.func,
+  autoComplete: PropTypes.oneOf(['on', 'off']),
+  secondIcon: PropTypes.element,
+  onMouseDown: PropTypes.func,
+  onMouseUp: PropTypes.func,
+  onMouseLeave: PropTypes.func,
 };
 
 Input.defaultProps = {
+  type: 'text',
   preIcon: null,
   clearIcon: false,
-  handleClear: null,
+  onClick: null,
   autoComplete: 'on',
   value: null,
   onChange: null,
+  secondIcon: null,
+  onMouseDown: null,
+  onMouseUp: null,
+  onMouseLeave: null,
 };

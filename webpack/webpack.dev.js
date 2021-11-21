@@ -3,7 +3,9 @@ const common = require('../webpack.common.js');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = merge(common, {
+  entry: ['@babel/polyfill', './src/index.jsx'],
   mode: 'development',
+  target: 'web',
   ignoreWarnings: [(warning) => true],
   devtool: 'eval-source-map',
   output: {

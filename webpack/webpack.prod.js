@@ -7,12 +7,27 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 
 module.exports = merge(common, {
+  entry: {
+    polyfill: '@babel/polyfill',
+    main: './src/index.jsx',
+  },
   mode: 'production',
   output: {
     clean: true,
   },
+  target: 'browserslist',
   optimization: {
     minimizer: [new CssMinimizerPlugin(), new TerserWebpackPlugin()],
+    splitChunks: {
+      cacheGroups: {
+        vendors: {
+          test: /node_modules/,
+          name: 'vendors',
+          chunks: 'all',
+          enforce: true,
+        },
+      },
+    },
   },
   plugins: [
     new MiniCssExtractPlugin({

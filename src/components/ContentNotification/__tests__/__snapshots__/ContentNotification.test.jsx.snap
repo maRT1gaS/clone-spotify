@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContentNotification should render correctly 1`] = `
+<div
+  className="container"
+>
+  <h2
+    className="title"
+  >
+    В данный момент данных нет!
+  </h2>
+</div>
+`;

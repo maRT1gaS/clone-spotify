@@ -2,45 +2,46 @@ import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { ContentWrapper, MusicList, Loader } from '../../components/index';
+import { MusicList, Loader } from '../../components/index';
 import { loadingAction } from '../../redux/actions/loadingAction';
+import { HOME } from '../../redux/actionTypes';
 
-const Home = ({ loadingMusic, isLoading, recomendationMusic }) => {
+const Home = ({ loadingSongs, isLoading, songs }) => {
   useEffect(() => {
-    if (recomendationMusic.length === 0) {
-      loadingMusic('/recommendations', 'HOME');
+    if (songs.length === 0) {
+      loadingSongs('/recommendations', HOME);
     }
-  }, [loadingMusic, recomendationMusic.length]);
+  }, [loadingSongs, songs.length]);
 
   return (
     <>
       <Helmet>
         <title>Главная</title>
       </Helmet>
-      <ContentWrapper>
+      <>
         {isLoading ? (
           <Loader />
         ) : (
-          <MusicList name='Рекомендации' music={recomendationMusic} />
+          <MusicList name='Рекомендации' songs={songs} />
         )}
-      </ContentWrapper>
+      </>
     </>
   );
 };
 
 Home.propTypes = {
-  loadingMusic: PropTypes.func.isRequired,
+  loadingSongs: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  recomendationMusic: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  songs: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  isLoading: state.loadingReducer.isLoading,
-  recomendationMusic: state.loadingReducer.recomendationMusic,
+  isLoading: state.loadingData.isLoading,
+  songs: state.loadingData.home,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  loadingMusic: (url, type) => dispatch(loadingAction(url, type)),
-});
+const mapDispatchToProps = {
+  loadingSongs: (url, type) => loadingAction(url, type),
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

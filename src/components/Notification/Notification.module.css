@@ -10,9 +10,18 @@
 
   width: max-content;
   margin: auto;
-  padding: 2rem;
+  padding: 1.5rem 2rem;
 
   animation: animNotificationCon 1s linear;
+
+  border-radius: 1rem;
+  gap: 1rem;
+}
+
+.notificationSvg {
+  width: 4rem;
+  height: 4rem;
+  fill: var( --white );
 }
 
 .error {

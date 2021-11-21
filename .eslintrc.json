@@ -1,7 +1,8 @@
 {
     "env": {
         "browser": true,
-        "es2021": true
+        "es2021": true,
+        "jest": true
     },
     "parser": "@babel/eslint-parser",
     "extends": [
@@ -37,6 +38,7 @@
             "required": {
               "some": ["nesting", "id"]
             }
-          }]
+          }],
+          "react/prefer-stateless-function": "off"
     }
 }

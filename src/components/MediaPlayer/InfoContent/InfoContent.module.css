@@ -1,0 +1,50 @@
+.infoContent {
+  display: flex;
+  align-items: center;
+  flex: 0 1 30%;
+}
+
+.infoContentImg {
+  width: 6rem;
+  height: 6rem;
+  object-fit: cover;
+  object-position: center;
+}
+
+.infoContentText {
+  margin: 0 2rem;
+}
+
+.infoContentSong {
+  margin-bottom: 0.5rem;
+
+  font-size: 1.7rem;
+}
+
+.infoContentAuthor {
+  color: var( --white-opacity );
+
+  font-size: 1.2rem;
+}
+
+.infoContentSvg {
+  width: 2rem;
+  height: 2rem;
+
+  cursor: pointer;
+  transition: 0.3s linear;
+
+  opacity: 0.7;
+}
+
+.noLike {
+  fill: var( --white );
+}
+
+.like {
+  fill: #C00;
+}
+
+.infoContentSvg:hover {
+  opacity: 1;
+}

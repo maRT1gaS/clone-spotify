@@ -1,4 +1,8 @@
-import { ERROR, RESET_NOTIFICATION, SUCCESS } from '../actionTypes';
+import {
+  ERROR_NOTIFICATION,
+  RESET_NOTIFICATION,
+  SUCCESS_NOTIFICATION,
+} from '../actionTypes';
 
 const initionState = {
   notification: false,
@@ -6,15 +10,15 @@ const initionState = {
   textNotification: '',
 };
 
-export const notificationReducer = (state = initionState, action) => {
+export const notification = (state = initionState, action) => {
   switch (action.type) {
-    case ERROR:
+    case ERROR_NOTIFICATION:
       return {
         notification: true,
         typeNotification: 'error',
         textNotification: action.payload.textNotification,
       };
-    case SUCCESS:
+    case SUCCESS_NOTIFICATION:
       return {
         ...state,
         notification: true,

@@ -15,6 +15,7 @@ export function CardsList({ type, data, name }) {
             type={type}
             imageUrl={elem.imageUrl}
             name={elem.name}
+            id={elem.id}
           />
         ))}
       </div>
@@ -24,6 +25,6 @@ export function CardsList({ type, data, name }) {
 
 CardsList.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(['artist', 'album']).isRequired,
   name: PropTypes.string.isRequired,
 };

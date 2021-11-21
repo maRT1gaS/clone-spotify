@@ -1,43 +1,84 @@
-import React, { useState } from 'react';
-import { Switch, Redirect, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
 import {
   VerticalNav,
-  MediaPlayer,
   ContentHeader,
   HeaderUser,
   Input,
   Form,
-  ProtectedRoute,
+  ContentError,
+  ContentWrapper,
+  HeaderUserModal,
+  ModalPortal,
 } from '../../components/index';
-import UIKits from '../../screens/UIKits/UIKits';
-import Home from '../../screens/Home/Home';
-import Search from '../../screens/Search/Search';
-import MediaLibrary from '../../screens/MediaLibrary/MediaLibrary';
 import styles from './ContentPage.module.css';
 import SearchIcon from '../../assets/svg/loupe.svg';
+import MediaPlayer from '../../components/MediaPlayer/MediaPlayer';
+import ClearIcon from '../../assets/svg/delete.svg';
+import ContentPageRouting from '../../router/ContentPageRouting';
+import { closeModal } from '../../redux/actions/uiStateAction';
 
-const ContentPage = ({ name, isAuth }) => {
+const ContentPage = ({
+  name,
+  isError,
+  textError,
+  role,
+  isOpen,
+  typeModal,
+  closeModalWindow,
+}) => {
   const [value, setValue] = useState('');
+  const [visible, setVisible] = useState(false);
+  const [isFocus, setIsFocus] = useState(false);
   const location = useLocation();
+  const contentWrapperRef = React.createRef();
+
+  useEffect(() => {
+    if (location.pathname === '/search') {
+      const searchInput = document.getElementById('search');
+      searchInput.focus();
+    }
+  }, [location.pathname]);
 
   const handleChange = (e) => {
     setValue(e.target.value);
   };
 
+  const skipNav = (key) => {
+    if (key.code === 'Enter' || key.code === 'Space') {
+      key.preventDefault();
+      contentWrapperRef.current.focus();
+      setIsFocus(true);
+      return;
+    }
+    setVisible(false);
+  };
+
   const handleClear = () => setValue('');
 
   return (
-    <div className={`${styles.wrapperContent} fullscreen`}>
-      <VerticalNav style={{ gridArea: 'verticalNav' }} />
+    <div
+      onClick={() => {
+        if (isOpen) closeModalWindow();
+      }}
+      role='presentation'
+      className={`${styles.wrapperContent} fullscreen`}
+    >
+      <VerticalNav
+        onKeyDown={(key) => skipNav(key)}
+        setVisible={setVisible}
+        visible={visible}
+      />
       <div className={styles.contentWrapper}>
         <ContentHeader>
           <div style={{ flex: '0 1 30rem' }}>
             {location.pathname === '/search' && (
               <Form role='search' legend='Поиск песен, подкастов, музыкантов'>
                 <Input
-                  text='Поиск подкастов, музыки'
+                  label='Поиск подкастов, музыки'
                   id='search'
                   value={value}
                   onChange={handleChange}
@@ -45,43 +86,55 @@ const ContentPage = ({ name, isAuth }) => {
                   preIcon={<SearchIcon />}
                   placeholder='Исполнитель, трек или подкаст'
                   clearIcon
-                  handleClear={handleClear}
+                  onClick={handleClear}
                   autoComplete='off'
+                  secondIcon={value.length ? <ClearIcon /> : null}
                 />
               </Form>
             )}
           </div>
-          <HeaderUser name={name} />
+          <HeaderUser role={role} name={name} />
+          {isOpen && typeModal === 'headerUser' && (
+            <ModalPortal>
+              <HeaderUserModal title='Админка' href='http://localhost:8000/' />
+            </ModalPortal>
+          )}
         </ContentHeader>
-        <Switch>
-          <ProtectedRoute isAuth={isAuth} exact path='/' component={Home} />
-          <ProtectedRoute isAuth={isAuth} path='/search'>
-            <Search search={value} />
-          </ProtectedRoute>
-          <ProtectedRoute
-            isAuth={isAuth}
-            path='/medialibrary'
-            component={MediaLibrary}
-          />
-          <ProtectedRoute isAuth={isAuth} path='/uikits' component={UIKits} />
-          <Redirect to='/404' />
-        </Switch>
+        <ContentWrapper
+          onBlur={() => setIsFocus(false)}
+          isFocus={isFocus}
+          ref={contentWrapperRef}
+        >
+          {isError && <ContentError title={textError} />}
+          <ContentPageRouting value={value} />
+        </ContentWrapper>
       </div>
-      <MediaPlayer>
-        <h2>MediaPlayer</h2>
-      </MediaPlayer>
+      <MediaPlayer />
     </div>
   );
 };
 
 ContentPage.propTypes = {
   name: PropTypes.string.isRequired,
-  isAuth: PropTypes.bool.isRequired,
+  isError: PropTypes.bool.isRequired,
+  textError: PropTypes.string.isRequired,
+  role: PropTypes.string.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  typeModal: PropTypes.string.isRequired,
+  closeModalWindow: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  name: state.authReducer.name,
-  isAuth: state.authReducer.isAuth,
+  name: state.authorization.name,
+  isError: state.loadingData.isError,
+  textError: state.loadingData.textError,
+  role: state.authorization.role,
+  isOpen: state.uiState.isOpen,
+  typeModal: state.uiState.typeModal,
 });
 
-export default connect(mapStateToProps)(ContentPage);
+const mapDispatchToProps = {
+  closeModalWindow: () => closeModal(),
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContentPage);

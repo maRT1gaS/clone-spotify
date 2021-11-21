@@ -1,12 +1,18 @@
 import { combineReducers } from 'redux';
-import { authReducer } from './authReducer';
-import { notificationReducer } from './notificationReducer';
-import { loadingReducer } from './loadingReducer';
+import { authorization } from './authorization';
+import { notification } from './notification';
+import { loadingData } from './loadingData';
+import { playingSong } from './playingSong';
+import { uiState } from './uiState';
+import { LOG_OUT } from '../actionTypes';
 
 const rootReducer = combineReducers({
-  authReducer,
-  notificationReducer,
-  loadingReducer,
+  authorization,
+  notification,
+  loadingData,
+  playingSong,
+  uiState,
 });
 
-export default rootReducer;
+export default (state, action) =>
+  rootReducer(action.type === LOG_OUT ? undefined : state, action);

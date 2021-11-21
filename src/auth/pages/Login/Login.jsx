@@ -3,6 +3,8 @@ import { Helmet } from 'react-helmet-async';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
+import EyeIcon from '../../../assets/svg/eye.svg';
+import EyeInvisible from '../../../assets/svg/eye-invisible.svg';
 
 import AuthContainer from '../../components/AuthContainer/AuthContainer';
 import AuthTitle from '../../components/AuthTitle/AuthTitle';
@@ -22,6 +24,7 @@ import { authorisationAction } from '../../../redux/actions/authAction';
 const Login = ({ onAuthorisation, isAuth, typeNotification }) => {
   const [emailInp, setEmailInp] = useState('');
   const [passwordInp, setPasswordInp] = useState('');
+  const [isShow, setIsShow] = useState(false);
 
   const handleEmailInp = (e) => setEmailInp(e.target.value);
 
@@ -37,20 +40,32 @@ const Login = ({ onAuthorisation, isAuth, typeNotification }) => {
   };
 
   useEffect(() => {
+    if (typeNotification === 'success') {
+      setPasswordInp('');
+      setEmailInp('');
+    }
+  }, [typeNotification]);
+
+  useEffect(() => {
     if (!isAuth) {
       const firstInput = document.getElementById('email');
       firstInput.focus();
-      if (typeNotification === 'success') {
-        setPasswordInp('');
-        setEmailInp('');
-      }
     }
-    return false;
-  }, [isAuth, typeNotification]);
+  }, [isAuth]);
 
   if (isAuth) {
     return <Redirect push to='/' />;
   }
+
+  const showPassword = (e) => {
+    if (e.button === 0) {
+      setIsShow(true);
+    }
+  };
+
+  const hidePassword = () => {
+    setIsShow(false);
+  };
 
   return (
     <>
@@ -69,7 +84,7 @@ const Login = ({ onAuthorisation, isAuth, typeNotification }) => {
                 placeholder='Введите ваш email*'
                 type='email'
                 id='email'
-                text='Введите ваш email'
+                label='Введите ваш email'
                 preIcon={<EmailIcon />}
               />
 
@@ -77,10 +92,14 @@ const Login = ({ onAuthorisation, isAuth, typeNotification }) => {
                 value={passwordInp}
                 onChange={handlePasswordInp}
                 placeholder='Введите ваш пароль*'
-                type='password'
+                type={isShow ? 'text' : 'password'}
                 id='password'
-                text='Введите ваш пароль'
+                label='Введите ваш пароль'
                 preIcon={<PasswordIcon />}
+                secondIcon={isShow ? <EyeInvisible /> : <EyeIcon />}
+                onMouseDown={showPassword}
+                onMouseUp={hidePassword}
+                onMouseLeave={hidePassword}
               />
               <Button type='submit'>Войти</Button>
             </div>
@@ -98,13 +117,13 @@ Login.propTypes = {
   typeNotification: PropTypes.string.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onAuthorisation: (authData) => dispatch(authorisationAction(authData)),
-});
+const mapDispatchToProps = {
+  onAuthorisation: (authData) => authorisationAction(authData),
+};
 
 const mapStateToProps = (state) => ({
-  isAuth: state.authReducer.isAuth,
-  typeNotification: state.notificationReducer.typeNotification,
+  isAuth: state.authorization.isAuth,
+  typeNotification: state.notification.typeNotification,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

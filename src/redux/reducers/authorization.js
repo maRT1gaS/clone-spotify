@@ -4,17 +4,17 @@ const initionState = {
   isAuth: false,
   name: '',
   email: '',
-  id: '',
+  role: '',
 };
 
-export const authReducer = (state = initionState, action) => {
+export const authorization = (state = initionState, action) => {
   switch (action.type) {
     case START_AUTH:
       return {
         isAuth: false,
         name: '',
         email: '',
-        id: '',
+        role: '',
       };
     case SUCCESS_AUTH:
       return {
@@ -22,7 +22,7 @@ export const authReducer = (state = initionState, action) => {
         isAuth: true,
         name: action.payload.name,
         email: action.payload.email,
-        id: action.payload.id,
+        role: action.payload.role,
       };
     default:
       return state;

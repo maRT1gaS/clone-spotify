@@ -4,6 +4,10 @@
   justify-content: flex-start;
 
   width: max-content;
+
+  border-radius: 1rem;
+
+  outline: none;
 }
 
 .logoLink {
