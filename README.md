@@ -1,5 +1,5 @@
-[![ESLint Status](https://github.com/maRT1gaS/clone-spotify/actions/workflows/eslint.yml/badge.svg)](https://github.com/maRT1gaS/spoty/actions/workflows/eslint.yml)
-[![Stylelint Status](https://github.com/maRT1gaS/clone-spotify/actions/workflows/stylelint.yml/badge.svg)](https://github.com/maRT1gaS/spoty/actions/workflows/stylelint.yml)
+[![ESLint Status](https://github.com/maRT1gaS/spoty/actions/workflows/eslint.yml/badge.svg)](https://github.com/maRT1gaS/spoty/actions/workflows/eslint.yml)
+[![Stylelint Status](https://github.com/maRT1gaS/spoty/actions/workflows/stylelint.yml/badge.svg)](https://github.com/maRT1gaS/spoty/actions/workflows/stylelint.yml)
 
 ## First step:
 
