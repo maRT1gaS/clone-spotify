@@ -18,13 +18,18 @@ module.exports = merge(common, {
   target: 'browserslist',
   optimization: {
     minimizer: [new CssMinimizerPlugin(), new TerserWebpackPlugin()],
+    runtimeChunk: 'single',
     splitChunks: {
+      chunks: 'all',
+      maxInitialRequests: Infinity,
+      minSize: 0,
       cacheGroups: {
-        vendors: {
-          test: /node_modules/,
-          name: 'vendors',
-          chunks: 'all',
-          enforce: true,
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name(module) {
+            const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+            return `vendors/npm.${packageName.replace('@', '')}`;
+          },
         },
       },
     },

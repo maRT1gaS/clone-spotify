@@ -7,7 +7,7 @@ module.exports = merge(common, {
   mode: 'development',
   target: 'web',
   ignoreWarnings: [(warning) => true],
-  devtool: 'eval-source-map',
+  devtool: 'source-map',
   output: {
     publicPath: '/',
   },

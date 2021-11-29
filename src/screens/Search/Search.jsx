@@ -10,6 +10,7 @@ import {
 } from '../../components/index';
 import { loadingAction } from '../../redux/actions/loadingAction';
 import { SEARCH } from '../../redux/actionTypes';
+import useDebounce from '../../hooks/useDebounce';
 
 const Search = ({
   searchData: { songs, artists, albums },
@@ -17,9 +18,10 @@ const Search = ({
   isLoading,
   loadingSearchData,
 }) => {
+  const debaunceValue = useDebounce(searchValue, 500);
   useEffect(() => {
-    loadingSearchData(`/search?query=${searchValue}`, SEARCH);
-  }, [loadingSearchData, searchValue]);
+    loadingSearchData(`/search?query=${debaunceValue}`, SEARCH);
+  }, [loadingSearchData, debaunceValue]);
 
   return (
     <>

@@ -41,6 +41,9 @@ const ContentPage = ({
       const searchInput = document.getElementById('search');
       searchInput.focus();
     }
+    return () => {
+      setValue('');
+    };
   }, [location.pathname]);
 
   const handleChange = (e) => {
