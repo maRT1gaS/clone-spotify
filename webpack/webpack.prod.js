@@ -24,12 +24,10 @@ module.exports = merge(common, {
       maxInitialRequests: Infinity,
       minSize: 0,
       cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name(module) {
-            const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
-            return `vendors/npm.${packageName.replace('@', '')}`;
-          },
+        vendors: {
+          test: /node_modules/,
+          name: 'vendors',
+          enforce: true,
         },
       },
     },

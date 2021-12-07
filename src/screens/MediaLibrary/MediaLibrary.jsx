@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { MusicList, Loader, ContentNotification } from '../../components/index';
 import { loadingAction } from '../../redux/actions/loadingAction';
 import { LIBRARY } from '../../redux/actionTypes';
+import { TSong } from '../../types/Song.type';
 
 const MediaLibrary = ({ library, isLoading, loadingSongs }) => {
   useEffect(() => {
@@ -37,7 +38,7 @@ const MediaLibrary = ({ library, isLoading, loadingSongs }) => {
 MediaLibrary.propTypes = {
   loadingSongs: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  library: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  library: PropTypes.arrayOf(PropTypes.shape(TSong)).isRequired,
 };
 
 const mapStateToProps = (state) => ({

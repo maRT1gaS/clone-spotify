@@ -2,6 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { TSong } from '../../types/Song.type';
 import {
   ContentTitle,
   PlayingSongsList,
@@ -14,7 +15,11 @@ class PlayingPlaylist extends React.Component {
     return (
       <>
         <Helmet>
-          <title>Сейчас играет</title>
+          <title>
+            {currentSong?.id
+              ? `Сейчас играет ${currentSong.artist.name} - ${currentSong.name}`
+              : 'На данный моменнт в очереди ничего нет'}{' '}
+          </title>
         </Helmet>
         <>
           <ContentTitle name='Очередь' />
@@ -33,8 +38,8 @@ class PlayingPlaylist extends React.Component {
 }
 
 PlayingPlaylist.propTypes = {
-  songs: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  currentSong: PropTypes.shape().isRequired,
+  songs: PropTypes.arrayOf(PropTypes.shape(TSong)).isRequired,
+  currentSong: PropTypes.shape(TSong).isRequired,
 };
 
 const mapStateToProps = (state) => ({

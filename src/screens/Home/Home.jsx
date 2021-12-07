@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { MusicList, Loader } from '../../components/index';
 import { loadingAction } from '../../redux/actions/loadingAction';
 import { HOME } from '../../redux/actionTypes';
+import { TSong } from '../../types/Song.type';
 
 const Home = ({ loadingSongs, isLoading, songs }) => {
   useEffect(() => {
@@ -32,7 +33,7 @@ const Home = ({ loadingSongs, isLoading, songs }) => {
 Home.propTypes = {
   loadingSongs: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  songs: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  songs: PropTypes.arrayOf(PropTypes.shape(TSong)).isRequired,
 };
 
 const mapStateToProps = (state) => ({

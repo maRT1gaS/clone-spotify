@@ -26,7 +26,9 @@
         "@babel"
     ],
     "rules": {
-        "prettier/prettier": "error",
+        "prettier/prettier":["error", {
+          "endOfLine": "auto"
+        }],
         "no-console": "warn",
         "import/prefer-default-export": "off",
         "jsx-a11y/label-has-associated-control": ["error", {
@@ -39,6 +41,7 @@
               "some": ["nesting", "id"]
             }
           }],
-          "react/prefer-stateless-function": "off"
+          "react/prefer-stateless-function": "off",
+          "id-match": ["error", "^[_a-zA-Z]*$"]
     }
 }

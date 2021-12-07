@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Cookie from 'js-cookie';
-import { Helmet } from 'react-helmet-async';
 import jwtDecode from 'jwt-decode';
 import styles from './App.module.css';
 import { LoaderPage, Notification } from './components/index';
@@ -49,23 +48,18 @@ const App = ({
     setLoading(false);
   }, [setUserData, changeVolume, playingSong]);
   return (
-    <>
-      <Helmet>
-        <title>j</title>
-      </Helmet>
-      <div className={`${styles.wrapper} fullscreen`}>
-        {loading ? (
-          <LoaderPage />
-        ) : (
-          <>
-            {notification && (
-              <Notification name={textNotification} type={typeNotification} />
-            )}
-            <RootAppRouting />
-          </>
-        )}
-      </div>
-    </>
+    <div className={`${styles.wrapper} fullscreen`}>
+      {loading ? (
+        <LoaderPage />
+      ) : (
+        <>
+          {notification && (
+            <Notification name={textNotification} type={typeNotification} />
+          )}
+          <RootAppRouting />
+        </>
+      )}
+    </div>
   );
 };
 

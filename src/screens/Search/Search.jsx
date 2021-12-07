@@ -11,6 +11,7 @@ import {
 import { loadingAction } from '../../redux/actions/loadingAction';
 import { SEARCH } from '../../redux/actionTypes';
 import useDebounce from '../../hooks/useDebounce';
+import { TSong } from '../../types/Song.type';
 
 const Search = ({
   searchData: { songs, artists, albums },
@@ -56,9 +57,21 @@ Search.propTypes = {
   searchValue: PropTypes.string.isRequired,
   isLoading: PropTypes.bool.isRequired,
   searchData: PropTypes.shape({
-    songs: PropTypes.arrayOf(PropTypes.shape()),
-    albums: PropTypes.arrayOf(PropTypes.shape()),
-    artists: PropTypes.arrayOf(PropTypes.shape()),
+    songs: PropTypes.arrayOf(PropTypes.shape(TSong)),
+    albums: PropTypes.arrayOf(
+      PropTypes.shape({
+        imageUrl: PropTypes.string,
+        name: PropTypes.string,
+        id: PropTypes.string,
+      })
+    ),
+    artists: PropTypes.arrayOf(
+      PropTypes.shape({
+        imageUrl: PropTypes.string,
+        name: PropTypes.string,
+        id: PropTypes.string,
+      })
+    ),
   }).isRequired,
   loadingSearchData: PropTypes.func.isRequired,
 };
