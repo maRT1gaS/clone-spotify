@@ -1,10 +1,10 @@
 {
-  "name": "clone-spotify",
+  "name": "spoty",
   "version": "1.0.0",
   "description": "",
   "repository": {
     "type": "git",
-    "url": "https://github.com/maRT1gaS/clone-spotify.git"
+    "url": "https://github.com/maRT1gaS/spoty.git"
   },
   "proxy": "http://localhost:5000",
   "scripts": {
